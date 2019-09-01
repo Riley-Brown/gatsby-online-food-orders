@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react"
 import Img from "gatsby-image"
 
-export default function Item({ item }) {
+export default function Item({ item, addToOrder }) {
   const [price, setPrice] = useState(null)
   const [itemSize, setItemSize] = useState(null)
   const [addOnsPrice, setAddOnsPrice] = useState(null)
   const [order, setOrder] = useState(null)
+  const [quantity, setQuantity] = useState(1)
 
   useEffect(() => {
     if (item.itemOptions) {
@@ -53,8 +54,19 @@ export default function Item({ item }) {
       </select>
       <h5>
         $
-        {addOnsPrice ? (Number(price) + Number(addOnsPrice)).toFixed(2) : price}
+        {addOnsPrice
+          ? ((Number(price) + Number(addOnsPrice)) * quantity).toFixed(2)
+          : (price * quantity).toFixed(2)}
       </h5>
+      <div className="quantity">
+        <button
+          onClick={() => quantity > 1 && setQuantity(quantity => quantity - 1)}
+        >
+          -
+        </button>
+        <span>{quantity}</span>
+        <button onClick={() => setQuantity(quantity => quantity + 1)}>+</button>
+      </div>
       {item.itemOptions.itemAddOns.addOn.map((addOn, index) => (
         <div>
           <input
@@ -70,7 +82,7 @@ export default function Item({ item }) {
           </label>
         </div>
       ))}
-      <button>Add to Order</button>
+      <button onClick={addToOrder}>Add to Order</button>
     </div>
   )
 }
