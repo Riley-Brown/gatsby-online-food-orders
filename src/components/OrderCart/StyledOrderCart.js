@@ -5,25 +5,28 @@ export const StyledOrderCart = styled.div`
   position: fixed;
   bottom: 0;
   right: 50px;
-  overflow: auto;
-  max-height: 400px;
   width: 380px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 1px 6px;
-  &::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #fff;
-  }
-  &::-webkit-scrollbar {
-    width: 12px;
-    background-color: #f5f5f5;
-  }
-  &::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
-    background-color: #ccc;
+
+  .items {
+    overflow-y: auto;
+    max-height: 400px;
+    &::-webkit-scrollbar-track {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      background-color: #fff;
+    }
+    &::-webkit-scrollbar {
+      width: 12px;
+      background-color: #f5f5f5;
+    }
+    &::-webkit-scrollbar-thumb {
+      -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+      background-color: #ccc;
+    }
   }
   .order-title {
     background: #222;
@@ -33,11 +36,13 @@ export const StyledOrderCart = styled.div`
     font-size: 2.2rem;
     position: sticky;
     top: 0;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
   }
   .item {
     padding: 10px 20px;
-    &:nth-child(odd) {
-      background: #ccc;
+    &:nth-child(even) {
+      background: #e6e6e6;
     }
     .item-name {
       ${row("space-between")};
@@ -45,6 +50,11 @@ export const StyledOrderCart = styled.div`
       span {
         font-size: 2rem;
         font-weight: 500;
+      }
+      img {
+        width: 27px;
+        height: 27px;
+        margin-left: 7px;
       }
     }
     .add-ons {
@@ -70,7 +80,6 @@ export const StyledOrderCart = styled.div`
   .total {
     ${row("space-between", "center")};
     padding: 20px;
-    /* margin-bottom: 100px; */
     h3 {
       font-size: 2rem;
       margin: 0;
