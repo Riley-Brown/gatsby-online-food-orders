@@ -22,10 +22,15 @@ const IndexPage = () => {
     setOrder(order => [...order, item])
     localStorage.setItem("order", JSON.stringify(order))
   }
+
+  const removeFromOrder = index => {
+    setOrder(prevOrder => prevOrder.filter((_, i) => i !== index))
+    localStorage.setItem("order", JSON.stringify(order))
+  }
   return (
     <Layout>
-      <MenuItems addToOrder={addToOrder} />
-      <OrderCart order={order} />
+      <MenuItems addToOrder={addToOrder} removeFromOrder={removeFromOrder} />
+      <OrderCart order={order} removeFromOrder={removeFromOrder} />
     </Layout>
   )
 }
