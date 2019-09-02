@@ -1,7 +1,19 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { StyledOrderCart } from "./StyledOrderCart"
 
-export default function index({ order }) {
+export default function OrderCart({ order }) {
+  const [totalPrice, setTotalPrice] = useState(null)
+
+  useEffect(() => {
+    if (order.length > 0) {
+      const total = order.reduce((a, b) => ({
+        price: Number(a.price) + Number(b.price),
+      }))
+
+      setTotalPrice(total.price)
+    }
+  }, [order])
+
   return (
     <StyledOrderCart>
       <h2 className="order-title">Your Order</h2>
@@ -13,12 +25,24 @@ export default function index({ order }) {
             </h1>
             <span>${item.price}</span>
           </div>
-          <h4>AddOns:</h4>
-          {item.addOns.length > 0 && item.addOns.map(addOn => <h4>{addOn}</h4>)}
+          {/* Add Ons */}
+          {item.addOns.length > 0 && (
+            <div className="add-ons">
+              <ul>
+                <h4>Add Ons</h4>
+                {item.addOns.map(addOn => (
+                  <li>{addOn}</li>
+                ))}
+              </ul>
+            </div>
+          )}
         </div>
       ))}
-      <h3>Total</h3>
-      <span>{order.price}</span>
+      <hr />
+      <div className="total">
+        <h3>Total</h3>
+        <span>${totalPrice}</span>
+      </div>
     </StyledOrderCart>
   )
 }
