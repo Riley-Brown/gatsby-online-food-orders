@@ -4,7 +4,7 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import Item from "../Item"
 
-export default function MenuItems() {
+export default function MenuItems({ addToOrder }) {
   const products = useStaticQuery(graphql`
     query ProductsQuery {
       allContentfulMenuItems {
@@ -35,11 +35,10 @@ export default function MenuItems() {
   `)
 
   const { edges } = products.allContentfulMenuItems
-  console.log(edges)
   return (
     <StyledMenuItems>
       {edges.map(edge => (
-        <Item item={edge.node} />
+        <Item item={edge.node} addToOrder={addToOrder} />
       ))}
     </StyledMenuItems>
   )
