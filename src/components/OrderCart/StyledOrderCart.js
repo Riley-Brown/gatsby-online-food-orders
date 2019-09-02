@@ -31,6 +31,8 @@ export const StyledOrderCart = styled.div`
     text-align: center;
     color: #fff;
     font-size: 2.2rem;
+    position: sticky;
+    top: 0;
   }
   .item {
     padding: 10px 20px;
@@ -44,6 +46,38 @@ export const StyledOrderCart = styled.div`
         font-size: 2rem;
         font-weight: 500;
       }
+    }
+    .add-ons {
+      ul {
+        margin: 0;
+        list-style: none;
+        h4 {
+          font-weight: 500;
+        }
+        li {
+          &::before {
+            content: "-";
+            margin: 0 5px;
+          }
+        }
+      }
+      h4 {
+        font-size: 1.6rem;
+        font-weight: normal;
+      }
+    }
+  }
+  .total {
+    ${row("space-between", "center")};
+    padding: 20px;
+    /* margin-bottom: 100px; */
+    h3 {
+      font-size: 2rem;
+      margin: 0;
+    }
+    span {
+      font-size: 2rem;
+      font-weight: 700;
     }
   }
 `
