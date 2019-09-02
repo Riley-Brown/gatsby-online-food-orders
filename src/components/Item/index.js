@@ -5,7 +5,7 @@ export default function Item({ item, addToOrder }) {
   const [price, setPrice] = useState(null)
   const [itemSize, setItemSize] = useState(null)
   const [addOnsPrice, setAddOnsPrice] = useState(null)
-  const [order, setOrder] = useState(null)
+  const [addOns, setAddOns] = useState([])
   const [quantity, setQuantity] = useState(1)
 
   useEffect(() => {
@@ -21,18 +21,31 @@ export default function Item({ item, addToOrder }) {
     setItemSize(dataset.size)
   }
 
-  const handleAddOns = (e, index) => {
+  const handleAddOns = e => {
     const { price } = e.target.dataset
-
+    const addOn = e.target.value
     if (e.target.checked) {
       setAddOnsPrice(prevPrice =>
         prevPrice !== null ? prevPrice + Number(price) : Number(price)
       )
+      setAddOns(addOns => [...addOns, addOn])
     } else if (!e.target.checked) {
       setAddOnsPrice(prevPrice =>
         prevPrice !== null ? Number(prevPrice) - Number(price) : Number(price)
       )
+      const filteredAddOns = addOns.filter(addOn => addOn !== e.target.value)
+      setAddOns(filteredAddOns)
     }
+  }
+
+  const handleAddToOrder = () => {
+    addToOrder({
+      name: item.itemName,
+      price,
+      size: itemSize,
+      addOns,
+      quantity,
+    })
   }
 
   return (
@@ -82,7 +95,7 @@ export default function Item({ item, addToOrder }) {
           </label>
         </div>
       ))}
-      <button onClick={addToOrder}>Add to Order</button>
+      <button onClick={handleAddToOrder}>Add to Order</button>
     </div>
   )
 }
