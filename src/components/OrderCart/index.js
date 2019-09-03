@@ -10,8 +10,9 @@ export default function OrderCart({ order, removeFromOrder }) {
       const total = order.reduce((a, b) => ({
         price: Number(a.price) + Number(b.price),
       }))
-
       setTotalPrice(Number(total.price).toFixed(2))
+    } else {
+      setTotalPrice(0)
     }
   }, [order])
 
