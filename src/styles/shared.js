@@ -1,4 +1,5 @@
-export const row = justifyContent => `
+export const row = (justifyContent, alignItems) => `
   display: flex;
-  justify-content: ${justifyContent};
+  justify-content: ${justifyContent || "initial"};
+  align-items: ${alignItems || "initial"}
 `
