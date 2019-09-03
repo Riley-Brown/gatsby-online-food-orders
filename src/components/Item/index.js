@@ -3,17 +3,33 @@ import Img from "gatsby-image"
 
 export default function Item({ item, addToOrder }) {
   const [price, setPrice] = useState(null)
+  const [totalPrice, setTotalPrice] = useState(null)
   const [itemSize, setItemSize] = useState(null)
   const [addOnsPrice, setAddOnsPrice] = useState(null)
   const [addOns, setAddOns] = useState([])
   const [quantity, setQuantity] = useState(1)
 
+  // handle initial price
   useEffect(() => {
     if (item.itemOptions) {
       setPrice(item.itemOptions.itemPrices[0])
       setItemSize(item.itemOptions.itemSizes[0])
     }
   }, [])
+
+  // handle total price
+  useEffect(() => {
+    const handleTotalPrice = () => {
+      if (addOnsPrice && price) {
+        setTotalPrice(
+          ((Number(price) + Number(addOnsPrice)) * quantity).toFixed(2)
+        )
+      } else if (price) {
+        setTotalPrice((price * quantity).toFixed(2))
+      }
+    }
+    handleTotalPrice()
+  }, [quantity, itemSize, addOns])
 
   const handleSizeChange = e => {
     const dataset = e.target.options[e.target.selectedIndex].dataset
@@ -41,7 +57,7 @@ export default function Item({ item, addToOrder }) {
   const handleAddToOrder = () => {
     addToOrder({
       name: item.itemName,
-      price,
+      price: totalPrice,
       size: itemSize,
       addOns,
       quantity,
@@ -65,12 +81,7 @@ export default function Item({ item, addToOrder }) {
           </option>
         ))}
       </select>
-      <h5>
-        $
-        {addOnsPrice
-          ? ((Number(price) + Number(addOnsPrice)) * quantity).toFixed(2)
-          : (price * quantity).toFixed(2)}
-      </h5>
+      <h5>${totalPrice}</h5>
       <div className="quantity">
         <button
           onClick={() => quantity > 1 && setQuantity(quantity => quantity - 1)}
