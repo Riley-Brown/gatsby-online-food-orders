@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react"
 import Img from "gatsby-image"
+import { StyledItem } from "./StyledItem"
 
 export default function Item({ item, addToOrder }) {
   const [price, setPrice] = useState(null)
@@ -65,23 +66,26 @@ export default function Item({ item, addToOrder }) {
   }
 
   return (
-    <div className="item">
-      <h1>{item.itemName}</h1>
-      <p>{item.itemDescription.itemDescription}</p>
+    <StyledItem className="item">
       <Img fluid={item.itemImage.fluid} />
-      <select name="select-size" id="" onChange={handleSizeChange}>
-        {item.itemOptions.itemSizes.map((size, index) => (
-          <option
-            value={size}
-            size={size}
-            data-size={size}
-            data-price={item.itemOptions.itemPrices[index]}
-          >
-            {size}
-          </option>
-        ))}
-      </select>
-      <h5>${totalPrice}</h5>
+      <div className="item-title">
+        <h1>{item.itemName}</h1>
+        <div>
+          <select name="select-size" id="" onChange={handleSizeChange}>
+            {item.itemOptions.itemSizes.map((size, index) => (
+              <option
+                value={size}
+                size={size}
+                data-size={size}
+                data-price={item.itemOptions.itemPrices[index]}
+              >
+                {size}
+              </option>
+            ))}
+          </select>
+          <h5>${totalPrice}</h5>
+        </div>
+      </div>
       <div className="quantity">
         <button
           onClick={() => quantity > 1 && setQuantity(quantity => quantity - 1)}
@@ -91,22 +95,28 @@ export default function Item({ item, addToOrder }) {
         <span>{quantity}</span>
         <button onClick={() => setQuantity(quantity => quantity + 1)}>+</button>
       </div>
-      {item.itemOptions.itemAddOns.addOn.map((addOn, index) => (
-        <div>
-          <input
-            type="checkbox"
-            name={addOn}
-            id={addOn}
-            value={addOn}
-            onChange={handleAddOns}
-            data-price={item.itemOptions.itemAddOns.addOnPrice[index]}
-          />
+      <p className="item-description">{item.itemDescription.itemDescription}</p>
+      <h5>Add Ons</h5>
+      <div className="add-ons">
+        {item.itemOptions.itemAddOns.addOn.map((addOn, index) => (
           <label htmlFor={addOn}>
-            {addOn} - ${item.itemOptions.itemAddOns.addOnPrice[index]}
+            <input
+              type="checkbox"
+              name={addOn}
+              id={addOn}
+              value={addOn}
+              onChange={handleAddOns}
+              data-price={item.itemOptions.itemAddOns.addOnPrice[index]}
+            />
+            <span className="check-mark" />
+            <span>{addOn}</span>
+            <span>+${item.itemOptions.itemAddOns.addOnPrice[index]}</span>
           </label>
-        </div>
-      ))}
-      <button onClick={handleAddToOrder}>Add to Order</button>
-    </div>
+        ))}
+      </div>
+      <button className="add-to-order" onClick={handleAddToOrder}>
+        Add to Order
+      </button>
+    </StyledItem>
   )
 }
