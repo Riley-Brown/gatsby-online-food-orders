@@ -10,23 +10,27 @@ import OrderCart from "../components/OrderCart"
 const IndexPage = () => {
   const [order, setOrder] = useState([])
 
+  // set initial order from local storage
   useEffect(() => {
     const localStorageOrder = localStorage.getItem("order")
-
     if (localStorageOrder) {
       setOrder(JSON.parse(localStorageOrder))
     }
   }, [])
 
+  // set order in local storage every time order updates
+  useEffect(() => {
+    localStorage.setItem("order", JSON.stringify(order))
+  }, [order])
+
   const addToOrder = item => {
     setOrder(order => [...order, item])
-    localStorage.setItem("order", JSON.stringify(order))
   }
 
   const removeFromOrder = index => {
     setOrder(prevOrder => prevOrder.filter((_, i) => i !== index))
-    localStorage.setItem("order", JSON.stringify(order))
   }
+
   return (
     <Layout>
       <MenuItems addToOrder={addToOrder} removeFromOrder={removeFromOrder} />
