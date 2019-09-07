@@ -9,10 +9,10 @@ export const StyledOrderCart = styled.div`
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 1px 6px;
-
+  transition: all 300ms;
   .items {
     overflow-y: auto;
-    max-height: 400px;
+    max-height: 300px;
     &::-webkit-scrollbar-track {
       -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
       box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
@@ -28,16 +28,27 @@ export const StyledOrderCart = styled.div`
       background-color: #ccc;
     }
   }
-  .order-title {
+  .order-header {
     background: #222;
     padding: 10px;
     text-align: center;
     color: #fff;
-    font-size: 2.2rem;
     position: sticky;
     top: 0;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    h2 {
+      font-size: 2.2rem;
+    }
+    .toggle {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
   }
   .item {
     padding: 10px 20px;
@@ -55,6 +66,12 @@ export const StyledOrderCart = styled.div`
         width: 27px;
         height: 27px;
         margin-left: 7px;
+      }
+      .item-price {
+        display: flex;
+        img {
+          cursor: pointer;
+        }
       }
     }
     .add-ons {
