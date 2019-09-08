@@ -6,6 +6,7 @@ import Image from "../components/image"
 import SEO from "../components/seo"
 import MenuItems from "../components/MenuItems"
 import OrderCart from "../components/OrderCart"
+import Categories from "../components/Categories"
 
 const IndexPage = () => {
   const [order, setOrder] = useState([])
@@ -33,7 +34,9 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      <MenuItems addToOrder={addToOrder} removeFromOrder={removeFromOrder} />
+      {/* <MenuItems addToOrder={addToOrder} removeFromOrder={removeFromOrder} /> */}
+      <Categories />
+      {/* <h1>Hey</h1> */}
       <OrderCart order={order} removeFromOrder={removeFromOrder} />
     </Layout>
   )
