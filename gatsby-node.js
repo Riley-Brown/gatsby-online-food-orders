@@ -5,9 +5,7 @@ exports.createPages = ({ graphql, boundActionCreators }) => {
   const { createPage } = boundActionCreators
 
   return new Promise((resolve, reject) => {
-    const categoryTemplate = path.resolve(
-      "src/components/Categories/Category/index.js"
-    )
+    const categoryTemplate = path.resolve("src/components/Category/index.js")
     resolve(
       graphql(`
         {
