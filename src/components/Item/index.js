@@ -15,6 +15,8 @@ export default function Item({ item, addToOrder }) {
     if (item.itemSizes) {
       setPrice(item.itemSizes[0].sizePrice)
       setItemSize(item.itemSizes[0].size)
+    } else {
+      setPrice(item.itemPrice)
     }
   }, [])
 
@@ -22,11 +24,11 @@ export default function Item({ item, addToOrder }) {
   useEffect(() => {
     const handleTotalPrice = () => {
       if (addOnsPrice && price) {
-        setTotalPrice(
-          ((Number(price) + Number(addOnsPrice)) * quantity).toFixed(2)
-        )
+        setTotalPrice(((price + addOnsPrice) * quantity).toFixed(2))
       } else if (price) {
         setTotalPrice((price * quantity).toFixed(2))
+      } else {
+        setTotalPrice(item.itemPrice)
       }
     }
     handleTotalPrice()
@@ -71,9 +73,9 @@ export default function Item({ item, addToOrder }) {
       <div className="item-title">
         <h1>{item.itemName}</h1>
         <div>
-          <select name="" id="select-size">
-            {item.itemSizes &&
-              item.itemSizes.map(size => (
+          {item.itemSizes && (
+            <select name="" id="select-size" onChange={handleSizeChange}>
+              {item.itemSizes.map(size => (
                 <option
                   value={size.size}
                   data-size={size.size}
@@ -82,7 +84,8 @@ export default function Item({ item, addToOrder }) {
                   {size.size}
                 </option>
               ))}
-          </select>
+            </select>
+          )}
           <h5>${totalPrice}</h5>
         </div>
       </div>
@@ -99,16 +102,15 @@ export default function Item({ item, addToOrder }) {
       <h5>Add Ons</h5>
       <div className="add-ons">
         {item.itemAddOns &&
-          item.itemAddOns.map((addOn, index) => (
-            <label htmlFor={addOn.addOnName}>
+          item.itemAddOns.map(addOn => (
+            <label htmlFor={`${item.itemName}-${addOn.addOnName}`}>
               <input
                 type="checkbox"
                 name={addOn.addOnName}
                 data-price={addOn.addOnPrice}
-                id={addOn.addOnName}
+                id={`${item.itemName}-${addOn.addOnName}`}
                 value={addOn.addOnName}
                 onChange={handleAddOns}
-                data-price={addOn.addOnPrice}
               />
               <span className="check-mark" />
               <span>{addOn.addOnName}</span>
