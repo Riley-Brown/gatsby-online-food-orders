@@ -30,18 +30,20 @@ export const category = graphql`
         id
         slug
         itemPrice
+        itemName
         inStock
         itemSizes {
           size
           sizePrice
         }
         itemAddOns {
+          id
           addOnName
           addOnPrice
         }
         itemImage {
           fluid {
-            src
+            ...GatsbyContentfulFluid
           }
         }
         itemDescription {
