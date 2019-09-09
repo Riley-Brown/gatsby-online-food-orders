@@ -12,9 +12,9 @@ export default function Item({ item, addToOrder }) {
 
   // handle initial price
   useEffect(() => {
-    if (item.itemOptions) {
-      setPrice(item.itemOptions.itemPrices[0])
-      setItemSize(item.itemOptions.itemSizes[0])
+    if (item.itemSizes) {
+      setPrice(item.itemSizes[0].sizePrice)
+      setItemSize(item.itemSizes[0].size)
     }
   }, [])
 
@@ -71,17 +71,17 @@ export default function Item({ item, addToOrder }) {
       <div className="item-title">
         <h1>{item.itemName}</h1>
         <div>
-          <select name="select-size" id="" onChange={handleSizeChange}>
-            {item.itemOptions.itemSizes.map((size, index) => (
-              <option
-                value={size}
-                size={size}
-                data-size={size}
-                data-price={item.itemOptions.itemPrices[index]}
-              >
-                {size}
-              </option>
-            ))}
+          <select name="" id="select-size">
+            {item.itemSizes &&
+              item.itemSizes.map(size => (
+                <option
+                  value={size.size}
+                  data-size={size.size}
+                  data-price={size.sizePrice}
+                >
+                  {size.size}
+                </option>
+              ))}
           </select>
           <h5>${totalPrice}</h5>
         </div>
@@ -98,25 +98,25 @@ export default function Item({ item, addToOrder }) {
       <p className="item-description">{item.itemDescription.itemDescription}</p>
       <h5>Add Ons</h5>
       <div className="add-ons">
-        {item.itemOptions.itemAddOns.addOn.map((addOn, index) => (
-          <label htmlFor={addOn}>
-            <input
-              type="checkbox"
-              name={addOn}
-              id={addOn}
-              value={addOn}
-              onChange={handleAddOns}
-              data-price={item.itemOptions.itemAddOns.addOnPrice[index]}
-            />
-            <span className="check-mark" />
-            <span>{addOn}</span>
-            <span>+${item.itemOptions.itemAddOns.addOnPrice[index]}</span>
-          </label>
-        ))}
+        {item.itemAddOns &&
+          item.itemAddOns.map((addOn, index) => (
+            <label htmlFor={addOn.addOnName}>
+              <input
+                type="checkbox"
+                name={addOn.addOnName}
+                data-price={addOn.addOnPrice}
+                id={addOn.addOnName}
+                value={addOn.addOnName}
+                onChange={handleAddOns}
+                data-price={addOn.addOnPrice}
+              />
+              <span className="check-mark" />
+              <span>{addOn.addOnName}</span>
+              <span>+${addOn.addOnPrice}</span>
+            </label>
+          ))}
       </div>
-      <button className="add-to-order" onClick={handleAddToOrder}>
-        Add to Order
-      </button>
+      <button className="add-to-order">Add to Order</button>
     </StyledItem>
   )
 }
