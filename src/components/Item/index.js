@@ -36,7 +36,7 @@ export default function Item({ item, addToOrder }) {
 
   const handleSizeChange = e => {
     const dataset = e.target.options[e.target.selectedIndex].dataset
-    setPrice(dataset.price)
+    setPrice(Number(dataset.price))
     setItemSize(dataset.size)
   }
 
