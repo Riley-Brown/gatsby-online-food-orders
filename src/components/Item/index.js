@@ -1,6 +1,9 @@
-import React, { useState, useEffect } from "react"
+import React, { useState, useEffect, useRef } from "react"
 import Img from "gatsby-image"
 import { StyledItem } from "./StyledItem"
+
+import plusSvg from "../../assets/svg/plus.svg"
+import minusSvg from "../../assets/svg/minus.svg"
 
 export default function Item({ item, addToOrder }) {
   const [price, setPrice] = useState(null)
@@ -9,6 +12,13 @@ export default function Item({ item, addToOrder }) {
   const [addOnsPrice, setAddOnsPrice] = useState(null)
   const [addOns, setAddOns] = useState([])
   const [quantity, setQuantity] = useState(1)
+  const [showAddOns, setShowAddOns] = useState(false)
+  const [addOnsHeight, setAddOnsHeight] = useState(null)
+  const addOnsRef = useRef(null)
+
+  useEffect(() => {
+    setAddOnsHeight(addOnsRef.current.clientHeight)
+  }, [addOnsRef])
 
   // handle initial price
   useEffect(() => {
@@ -73,6 +83,7 @@ export default function Item({ item, addToOrder }) {
       <div className="item-title">
         <h1>{item.itemName}</h1>
         <div>
+          {/* Sizes */}
           {item.itemSizes && (
             <select name="" id="select-size" onChange={handleSizeChange}>
               {item.itemSizes.map(size => (
@@ -99,25 +110,45 @@ export default function Item({ item, addToOrder }) {
         <button onClick={() => setQuantity(quantity => quantity + 1)}>+</button>
       </div>
       <p className="item-description">{item.itemDescription.itemDescription}</p>
-      <h5>Add Ons</h5>
-      <div className="add-ons">
-        {item.itemAddOns &&
-          item.itemAddOns.map(addOn => (
-            <label htmlFor={`${item.itemName}-${addOn.addOnName}`}>
-              <input
-                type="checkbox"
-                name={addOn.addOnName}
-                data-price={addOn.addOnPrice}
-                id={`${item.itemName}-${addOn.addOnName}`}
-                value={addOn.addOnName}
-                onChange={handleAddOns}
-              />
-              <span className="check-mark" />
-              <span>{addOn.addOnName}</span>
-              <span>+${addOn.addOnPrice}</span>
-            </label>
-          ))}
-      </div>
+
+      {/* Add ons */}
+      {item.itemAddOns && (
+        <div className="add-ons-container">
+          <h5 onClick={() => setShowAddOns(show => !show)}>
+            Add Ons
+            <img src={showAddOns ? minusSvg : plusSvg} alt="" />
+          </h5>
+          <div
+            className="add-ons"
+            style={{
+              height:
+                addOnsHeight && showAddOns
+                  ? addOnsHeight
+                  : addOnsHeight
+                  ? "0"
+                  : null,
+              visibility: !addOnsHeight && "hidden",
+            }}
+            ref={addOnsRef}
+          >
+            {item.itemAddOns.map(addOn => (
+              <label htmlFor={`${item.itemName}-${addOn.addOnName}`}>
+                <input
+                  type="checkbox"
+                  name={addOn.addOnName}
+                  data-price={addOn.addOnPrice}
+                  id={`${item.itemName}-${addOn.addOnName}`}
+                  value={addOn.addOnName}
+                  onChange={handleAddOns}
+                />
+                <span className="check-mark" />
+                <span>{addOn.addOnName}</span>
+                <span>+${addOn.addOnPrice.toFixed(2)}</span>
+              </label>
+            ))}
+          </div>
+        </div>
+      )}
       <button className="add-to-order">Add to Order</button>
     </StyledItem>
   )
