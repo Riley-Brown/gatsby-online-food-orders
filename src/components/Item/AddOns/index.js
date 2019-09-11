@@ -3,6 +3,8 @@ import React, { useEffect, useState, useRef } from "react"
 import plusSvg from "../../../assets/svg/plus.svg"
 import minusSvg from "../../../assets/svg/minus.svg"
 
+import { StyledAddOns } from "./StyledAddOns"
+
 export default function AddOns({ item, setAddOnsPrice }) {
   const [showAddOns, setShowAddOns] = useState(false)
   const [addOnsHeight, setAddOnsHeight] = useState(null)
@@ -33,7 +35,7 @@ export default function AddOns({ item, setAddOnsPrice }) {
   }
 
   return (
-    <div className="add-ons-container">
+    <StyledAddOns>
       <h5 onClick={() => setShowAddOns(show => !show)}>
         Add Ons
         <img src={showAddOns ? minusSvg : plusSvg} alt="" />
@@ -67,6 +69,6 @@ export default function AddOns({ item, setAddOnsPrice }) {
           </label>
         ))}
       </div>
-    </div>
+    </StyledAddOns>
   )
 }
