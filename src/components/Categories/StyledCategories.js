@@ -3,12 +3,17 @@ import styled from "styled-components"
 export const StyledCategories = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
+  flex: 0 0 75%;
+  justify-content: space-around;
+  &::after {
+    content: "";
+    width: 40%;
+  }
   .category {
     background: #f5f5f5;
     margin-bottom: 4rem;
     border-radius: 15px;
-    width: 20%;
+    width: 40%;
     position: relative;
     background: rgba(0, 0, 0, 0.4);
     &:hover {
