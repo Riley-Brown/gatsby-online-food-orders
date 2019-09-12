@@ -3,11 +3,13 @@ import { StyledOrderCart } from "./StyledOrderCart"
 import deleteIcon from "../../assets/svg/delete.svg"
 import chevronUp from "../../assets/svg/chevron-up.svg"
 import chevronDown from "../../assets/svg/chevron-down.svg"
+import emptyCartSvg from "../../assets/svg/empty-cart.svg"
 
 export default function OrderCart({ order, removeFromOrder }) {
   const [totalPrice, setTotalPrice] = useState(null)
   const [showFullCart, setShowFullCart] = useState(true)
   const [cartHeight, setCartHeight] = useState(null)
+  const [cartEmpty, setCartEmpty] = useState(null)
 
   const cartRef = useRef(null)
 
@@ -18,8 +20,10 @@ export default function OrderCart({ order, removeFromOrder }) {
         price: Number(a.price) + Number(b.price),
       }))
       setTotalPrice(Number(total.price).toFixed(2))
+      setCartEmpty(false)
     } else {
       setTotalPrice(0)
+      setCartEmpty(true)
     }
   }, [order])
 
@@ -43,52 +47,54 @@ export default function OrderCart({ order, removeFromOrder }) {
         style={{ cursor: !showFullCart && "pointer" }}
       >
         <h2 className="order-title">Your Order</h2>
-        {showFullCart ? (
-          <img
-            className="toggle"
-            onClick={() => setShowFullCart(false)}
-            src={chevronDown}
-            alt="Minimize Cart"
-          />
-        ) : (
-          <img className="toggle" src={chevronUp} alt="Maximize Cart" />
-        )}
       </div>
-      <div className="items">
-        {order.map((item, index) => (
-          <div className="item">
-            <div className="item-name">
-              <h1>
-                {item.quantity} {item.size} {item.name}
-              </h1>
-              <div className="item-price">
-                <span>${item.price}</span>
-                <img
-                  onClick={() => removeFromOrder(index)}
-                  src={deleteIcon}
-                  alt="Delete Item"
-                />
-              </div>
-            </div>
-            {/* Add Ons */}
-            {item.addOns.length > 0 && (
-              <div className="add-ons">
-                <ul>
-                  <h4>Add Ons</h4>
-                  {item.addOns.map(addOn => (
-                    <li>{addOn}</li>
-                  ))}
-                </ul>
-              </div>
-            )}
+      {cartEmpty ? (
+        <div className="empty-cart">
+          <div>
+            <h4>Order Empty!</h4>
+            <p>Click on any category to start building your order.</p>
           </div>
-        ))}
-      </div>
-      <hr />
-      <div className="total">
-        <h3>Total</h3>
-        <span>${totalPrice}</span>
-      </div>
+          <img className="empty-cart" src={emptyCartSvg}></img>
+        </div>
+      ) : (
+        <>
+          <div className="items">
+            {order.map((item, index) => (
+              <div className="item">
+                <div className="item-name">
+                  <h1>
+                    {item.quantity} {item.size} {item.name}
+                  </h1>
+                  <div className="item-price">
+                    <span>${item.price}</span>
+                    <img
+                      onClick={() => removeFromOrder(index)}
+                      src={deleteIcon}
+                      alt="Delete Item"
+                    />
+                  </div>
+                </div>
+                {/* Add Ons */}
+                {item.addOns.length > 0 && (
+                  <div className="add-ons">
+                    <ul>
+                      <h4>Add Ons</h4>
+                      {item.addOns.map(addOn => (
+                        <li>{addOn}</li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+            ))}
+          </div>
+          <hr />
+          <div className="total">
+            <h3>Total</h3>
+            <span>${totalPrice}</span>
+          </div>
+        </>
+      )}
     </StyledOrderCart>
   )
 }
