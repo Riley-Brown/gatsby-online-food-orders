@@ -34,9 +34,7 @@ const IndexPage = () => {
 
   return (
     <Layout>
-      {/* <MenuItems addToOrder={addToOrder} removeFromOrder={removeFromOrder} /> */}
       <Categories />
-      {/* <h1>Hey</h1> */}
       <OrderCart order={order} removeFromOrder={removeFromOrder} />
     </Layout>
   )
