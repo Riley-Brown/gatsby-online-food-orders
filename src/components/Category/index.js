@@ -1,11 +1,33 @@
-import React from "react"
+import React, { useState, useEffect } from "react"
 import { graphql } from "gatsby"
 import { StyledCategory } from "./StyledCategory"
-import Img from "gatsby-image"
 import Item from "../Item"
 import Layout from "../layout"
+import OrderCart from "../OrderCart"
 
 export default function Category({ data }) {
+  const [order, setOrder] = useState([])
+
+  // set initial order from local storage
+  useEffect(() => {
+    const localStorageOrder = localStorage.getItem("order")
+    if (localStorageOrder) {
+      setOrder(JSON.parse(localStorageOrder))
+    }
+  }, [])
+
+  // set order in local storage every time order updates
+  useEffect(() => {
+    localStorage.setItem("order", JSON.stringify(order))
+  }, [order])
+
+  const addToOrder = item => {
+    setOrder(order => [...order, item])
+  }
+
+  const removeFromOrder = index => {
+    setOrder(prevOrder => prevOrder.filter((_, i) => i !== index))
+  }
   console.log(data)
   return (
     <Layout>
@@ -17,6 +39,7 @@ export default function Category({ data }) {
           ))}
         </div>
       </StyledCategory>
+      <OrderCart order={order} removeFromOrder={removeFromOrder} />
     </Layout>
   )
 }
