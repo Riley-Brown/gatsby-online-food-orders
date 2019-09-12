@@ -3,13 +3,37 @@ import { row } from "../../styles/shared"
 
 export const StyledOrderCart = styled.div`
   position: fixed;
-  bottom: 0;
   right: 50px;
   width: 380px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
+  height: 400px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #fff;
+  border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 1px 6px;
-  transition: all 300ms;
+  .empty-cart {
+    div {
+      h4 {
+        font-size: 2rem;
+        color: var(--secondary);
+      }
+      p {
+        opacity: 0.9;
+      }
+      position: absolute;
+      top: 85px;
+      left: 25px;
+      width: 40%;
+    }
+    img {
+      width: 100%;
+      border-radius: 10px;
+      margin: auto;
+      display: block;
+      position: absolute;
+      bottom: 0px;
+    }
+  }
   .items {
     overflow-y: auto;
     max-height: 300px;
