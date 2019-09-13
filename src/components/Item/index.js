@@ -103,7 +103,10 @@ export default function Item({ item, addToOrder }) {
       )}
       {item.itemOptions && (
         <>
-          <h5 onClick={() => setShowOptions(show => !show)}>
+          <h5
+            onClick={() => setShowOptions(show => !show)}
+            style={{ cursor: "pointer" }}
+          >
             Options
             <img
               style={{
