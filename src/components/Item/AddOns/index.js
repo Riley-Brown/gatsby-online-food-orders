@@ -4,6 +4,7 @@ import plusSvg from "../../../assets/svg/plus.svg"
 import minusSvg from "../../../assets/svg/minus.svg"
 
 import { StyledAddOns } from "./StyledAddOns"
+import { StyledCheckbox } from "../../../styles/StyledCheckbox"
 
 export default function AddOns({ item, setAddOnsPrice }) {
   const [showAddOns, setShowAddOns] = useState(false)
@@ -54,7 +55,7 @@ export default function AddOns({ item, setAddOnsPrice }) {
         ref={addOnsRef}
       >
         {item.itemAddOns.map(addOn => (
-          <label htmlFor={`${item.itemName}-${addOn.addOnName}`}>
+          <StyledCheckbox htmlFor={`${item.itemName}-${addOn.addOnName}`}>
             <input
               type="checkbox"
               name={addOn.addOnName}
@@ -66,7 +67,7 @@ export default function AddOns({ item, setAddOnsPrice }) {
             <span className="check-mark" />
             <span>{addOn.addOnName}</span>
             <span>+${addOn.addOnPrice.toFixed(2)}</span>
-          </label>
+          </StyledCheckbox>
         ))}
       </div>
     </StyledAddOns>
