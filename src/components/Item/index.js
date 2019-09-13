@@ -5,12 +5,16 @@ import { StyledItem } from "./StyledItem"
 import AddOns from "./AddOns"
 import Option from "./Option"
 
+import plusSvg from "../../assets/svg/plus.svg"
+import minusSvg from "../../assets/svg/minus.svg"
+
 export default function Item({ item, addToOrder }) {
   const [price, setPrice] = useState(null)
   const [totalPrice, setTotalPrice] = useState(null)
   const [itemSize, setItemSize] = useState(null)
   const [addOnsPrice, setAddOnsPrice] = useState(null)
   const [quantity, setQuantity] = useState(1)
+  const [showOptions, setShowOptions] = useState(false)
 
   // handle initial price
   useEffect(() => {
@@ -97,8 +101,25 @@ export default function Item({ item, addToOrder }) {
           setAddOnsPrice={setAddOnsPrice}
         />
       )}
-      {item.itemOptions &&
-        item.itemOptions.map(option => <Option option={option} />)}
+      {item.itemOptions && (
+        <>
+          <h5 onClick={() => setShowOptions(show => !show)}>
+            Options
+            <img
+              style={{
+                width: "20px",
+                verticalAlign: "bottom",
+                marginLeft: "0.5rem",
+              }}
+              src={showOptions ? minusSvg : plusSvg}
+              alt=""
+            />
+          </h5>
+          {item.itemOptions.map(option => (
+            <Option option={option} showOptions={showOptions} />
+          ))}
+        </>
+      )}
 
       <button className="add-to-order">Add to Order</button>
     </StyledItem>
