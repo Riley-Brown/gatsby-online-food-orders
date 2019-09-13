@@ -4,7 +4,6 @@ import { Link } from "gatsby"
 import Layout from "../components/layout"
 import Image from "../components/image"
 import SEO from "../components/seo"
-import MenuItems from "../components/MenuItems"
 import OrderCart from "../components/OrderCart"
 import Categories from "../components/Categories"
 
