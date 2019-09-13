@@ -3,6 +3,7 @@ import Img from "gatsby-image"
 import { StyledItem } from "./StyledItem"
 
 import AddOns from "./AddOns"
+import Option from "./Option"
 
 export default function Item({ item, addToOrder }) {
   const [price, setPrice] = useState(null)
@@ -96,6 +97,9 @@ export default function Item({ item, addToOrder }) {
           setAddOnsPrice={setAddOnsPrice}
         />
       )}
+      {item.itemOptions &&
+        item.itemOptions.map(option => <Option option={option} />)}
+
       <button className="add-to-order">Add to Order</button>
     </StyledItem>
   )
