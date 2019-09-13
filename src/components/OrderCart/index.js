@@ -9,7 +9,7 @@ export default function OrderCart({ order, removeFromOrder }) {
   const [totalPrice, setTotalPrice] = useState(null)
   const [showFullCart, setShowFullCart] = useState(true)
   const [cartHeight, setCartHeight] = useState(null)
-  const [cartEmpty, setCartEmpty] = useState(null)
+  const [cartEmpty, setCartEmpty] = useState(true)
 
   const cartRef = useRef(null)
 
