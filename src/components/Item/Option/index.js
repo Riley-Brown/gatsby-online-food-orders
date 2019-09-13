@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react"
 
 import { StyledOption } from "./StyledOption"
+import { StyledCheckbox } from "../../../styles/StyledCheckbox"
 
 export default function Option({ option, showOptions }) {
   // const [show, setShow] = useState(false)
@@ -32,12 +33,12 @@ export default function Option({ option, showOptions }) {
         }}
         ref={optionRef}
       >
-        <h1>{option.optionName}</h1>
+        <h5>{option.optionName}</h5>
         {option.optionChoice.map(choice => (
-          <label htmlFor={`${option.optionName}-${choice.choiceName}`}>
+          <StyledCheckbox htmlFor={`${option.optionName}-${choice.choiceName}`}>
             <input
               type="radio"
-              name="radio"
+              name={`${option.optionName}`}
               data-price={choice.choicePrice}
               id={`${option.optionName}-${choice.choiceName}`}
               value={choice.choiceName}
@@ -46,7 +47,7 @@ export default function Option({ option, showOptions }) {
             <span className="check-mark" />
             <span>{choice.choiceName}</span>
             <span>+${choice.choicePrice.toFixed(2)}</span>
-          </label>
+          </StyledCheckbox>
         ))}
       </div>
     </StyledOption>
