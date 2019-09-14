@@ -6,7 +6,7 @@ import minusSvg from "../../../assets/svg/minus.svg"
 import { StyledAddOns } from "./StyledAddOns"
 import { StyledCheckbox } from "../../../styles/StyledCheckbox"
 
-export default function AddOns({ item, setAddOnsPrice }) {
+export default function AddOns({ item, setAddOnsPrice, handleUpdateAddOns }) {
   const [showAddOns, setShowAddOns] = useState(false)
   const [addOnsHeight, setAddOnsHeight] = useState(null)
 
@@ -17,6 +17,10 @@ export default function AddOns({ item, setAddOnsPrice }) {
   useEffect(() => {
     setAddOnsHeight(addOnsRef.current.clientHeight)
   }, [addOnsRef])
+
+  useEffect(() => {
+    handleUpdateAddOns(addOns)
+  }, [addOns])
 
   const handleAddOns = e => {
     const { price } = e.target.dataset
@@ -35,7 +39,9 @@ export default function AddOns({ item, setAddOnsPrice }) {
   return (
     <StyledAddOns>
       <h5 onClick={() => setShowAddOns(show => !show)}>
-        Add Ons
+        <span style={{ minWidth: "65px", display: "inline-block" }}>
+          Add Ons
+        </span>
         <img src={showAddOns ? minusSvg : plusSvg} alt="" />
       </h5>
       <div
