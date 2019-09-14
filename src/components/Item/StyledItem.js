@@ -60,5 +60,6 @@ export const StyledItem = styled.div`
     text-align: center;
     display: block;
     margin: 2rem auto;
+    cursor: pointer;
   }
 `
