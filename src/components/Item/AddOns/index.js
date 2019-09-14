@@ -21,15 +21,12 @@ export default function AddOns({ item, setAddOnsPrice }) {
   const handleAddOns = e => {
     const { price } = e.target.dataset
     const addOn = e.target.value
+
     if (e.target.checked) {
-      setAddOnsPrice(prevPrice =>
-        prevPrice !== null ? prevPrice + Number(price) : Number(price)
-      )
+      setAddOnsPrice(prevPrice => prevPrice + Number(price))
       setAddOns(addOns => [...addOns, addOn])
     } else if (!e.target.checked) {
-      setAddOnsPrice(prevPrice =>
-        prevPrice !== null ? Number(prevPrice) - Number(price) : Number(price)
-      )
+      setAddOnsPrice(prevPrice => Number(prevPrice) - Number(price))
       const filteredAddOns = addOns.filter(addOn => addOn !== e.target.value)
       setAddOns(filteredAddOns)
     }
