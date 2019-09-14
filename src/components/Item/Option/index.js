@@ -8,8 +8,8 @@ export default function Option({
   showOptions,
   setOptionsPrice,
   itemId,
+  setOptions,
 }) {
-  // const [show, setShow] = useState(false)
   const [optionHeight, setOptionHeight] = useState(null)
   const [choice, setChoice] = useState({})
 
@@ -25,6 +25,10 @@ export default function Option({
     } else {
       setOptionsPrice(0)
     }
+  }, [choice])
+
+  useEffect(() => {
+    setOptions([choice])
   }, [choice])
 
   const handleOption = e => {
