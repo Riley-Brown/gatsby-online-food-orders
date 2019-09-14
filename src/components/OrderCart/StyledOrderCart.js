@@ -121,7 +121,7 @@ export const StyledOrderCart = styled.div`
   }
   .total {
     ${row("space-between", "center")};
-    padding: 20px;
+    padding: 10px 20px;
     h3 {
       font-size: 2rem;
       margin: 0;
