@@ -43,6 +43,19 @@ export default function Item({ item, addToOrder }) {
     handleTotalPrice()
   }, [quantity, itemSize, addOnsPrice, optionsPrice])
 
+  useEffect(() => {
+    if (options.length > 0) {
+      console.log("ayyy lmao")
+      const optionsTotal = options.reduce((a, b) => ({
+        price: Number(a.price) + Number(b.price),
+      }))
+      console.log(optionsTotal.price, "????")
+      setOptionsPrice(Number(optionsTotal.price))
+    } else {
+      setOptionsPrice(0)
+    }
+  }, [options])
+
   const handleSizeChange = e => {
     const dataset = e.target.options[e.target.selectedIndex].dataset
     setPrice(Number(dataset.price))
@@ -135,7 +148,7 @@ export default function Item({ item, addToOrder }) {
               alt=""
             />
           </h5>
-          {item.itemOptions.map(option => (
+          {item.itemOptions.map((option, index) => (
             <Option
               option={option}
               showOptions={showOptions}
@@ -143,6 +156,8 @@ export default function Item({ item, addToOrder }) {
               itemId={item.id}
               setOptionsPrice={setOptionsPrice}
               setOptions={setOptions}
+              options={options}
+              index={index}
             />
           ))}
         </>
