@@ -14,9 +14,15 @@ export const StyledAddOns = styled.div`
       margin-left: 0.5rem;
     }
   }
-  .add-ons {
-    margin-top: 1rem;
+  .add-ons-container {
     overflow: hidden;
     transition: height 300ms;
+    margin-top: 1rem;
+    .add-ons {
+      padding: 10px;
+      border-radius: 10px;
+      margin-bottom: 1rem;
+      background: #fff;
+    }
   }
 `
