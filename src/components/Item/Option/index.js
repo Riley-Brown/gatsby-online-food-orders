@@ -3,10 +3,15 @@ import React, { useState, useEffect, useRef } from "react"
 import { StyledOption } from "./StyledOption"
 import { StyledCheckbox } from "../../../styles/StyledCheckbox"
 
-export default function Option({ option, showOptions }) {
+export default function Option({
+  option,
+  showOptions,
+  setOptionsPrice,
+  itemId,
+}) {
   // const [show, setShow] = useState(false)
   const [optionHeight, setOptionHeight] = useState(null)
-  const [choice, setChoice] = useState([])
+  const [choice, setChoice] = useState({})
 
   const optionRef = useRef(null)
 
@@ -15,7 +20,16 @@ export default function Option({ option, showOptions }) {
   }, [optionRef])
 
   const handleOption = e => {
-    console.log("lol")
+    const { price } = e.target.dataset
+    if (e.target.value === "none") {
+      setChoice(null)
+    } else {
+      setChoice({
+        optionName: option.optionName,
+        price,
+        choiceName: e.target.value,
+      })
+    }
   }
 
   return (
@@ -34,13 +48,24 @@ export default function Option({ option, showOptions }) {
         ref={optionRef}
       >
         <h5>{option.optionName}</h5>
+        <StyledCheckbox>
+          <input
+            type="radio"
+            onChange={handleOption}
+            value="none"
+            name={`${itemId}-${option.optionName}`}
+            defaultChecked
+          />
+          <span className="check-mark" />
+          <span>None</span>
+        </StyledCheckbox>
         {option.optionChoice.map(choice => (
-          <StyledCheckbox htmlFor={`${option.optionName}-${choice.choiceName}`}>
+          <StyledCheckbox htmlFor={`${itemId}-${choice.choiceName}`}>
             <input
               type="radio"
-              name={`${option.optionName}`}
+              name={`${itemId}-${option.optionName}`}
               data-price={choice.choicePrice}
-              id={`${option.optionName}-${choice.choiceName}`}
+              id={`${itemId}-${choice.choiceName}`}
               value={choice.choiceName}
               onChange={handleOption}
             />
