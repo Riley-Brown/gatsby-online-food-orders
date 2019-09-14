@@ -35,7 +35,7 @@ export default function Category({ data }) {
         <h1>{data.contentfulCategory.categoryName}</h1>
         <div className="category-container">
           {data.contentfulCategory.item.map(item => (
-            <Item item={item} />
+            <Item item={item} addToOrder={addToOrder} />
           ))}
         </div>
       </StyledCategory>
@@ -79,6 +79,7 @@ export const category = graphql`
           itemDescription
         }
         itemOptions {
+          id
           optionName
           optionChoice {
             choiceName
