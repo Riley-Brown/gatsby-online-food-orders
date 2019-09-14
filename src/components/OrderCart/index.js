@@ -49,47 +49,50 @@ export default function OrderCart({ order, removeFromOrder }) {
       ) : (
         <>
           <div className="items">
-            {order.map((item, index) => (
-              <div className="item">
-                <div className="item-name">
-                  <h1>
-                    {item.quantity} {item.size} {item.name}
-                  </h1>
-                  <div className="item-price">
-                    <span>${item.price}</span>
-                    <img
-                      onClick={() => removeFromOrder(index)}
-                      src={deleteIcon}
-                      alt="Delete Item"
-                    />
+            {order
+              .map((item, index) => (
+                <div className="item">
+                  <div className="item-name">
+                    <h1>
+                      {item.quantity} {item.size} {item.name}
+                    </h1>
+                    <div className="item-price">
+                      <span>${item.price}</span>
+                      <img
+                        onClick={() => removeFromOrder(index)}
+                        src={deleteIcon}
+                        alt="Delete Item"
+                      />
+                    </div>
                   </div>
+                  {/* Add Ons */}
+                  {item.addOns.length > 0 && (
+                    <div className="add-ons">
+                      <ul>
+                        <h4>Add Ons</h4>
+                        {item.addOns.map(addOn => (
+                          <li>{addOn}</li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
+                  {/* Options */}
+                  {item.options.length > 0 && (
+                    <div className="add-ons">
+                      <ul>
+                        <h4>Options</h4>
+                        {item.options.map(option => (
+                          <li>
+                            {option.optionName}:{" "}
+                            <span>{option.choiceName}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
                 </div>
-                {/* Add Ons */}
-                {item.addOns.length > 0 && (
-                  <div className="add-ons">
-                    <ul>
-                      <h4>Add Ons</h4>
-                      {item.addOns.map(addOn => (
-                        <li>{addOn}</li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-                {/* Options */}
-                {item.options.length > 0 && (
-                  <div className="add-ons">
-                    <ul>
-                      <h4>Options</h4>
-                      {item.options.map(option => (
-                        <li>
-                          {option.optionName}: <span>{option.choiceName}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-              </div>
-            ))}
+              ))
+              .reverse()}
           </div>
           <hr />
           <div className="total">
