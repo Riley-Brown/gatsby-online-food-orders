@@ -75,6 +75,19 @@ export default function OrderCart({ order, removeFromOrder }) {
                     </ul>
                   </div>
                 )}
+                {/* Options */}
+                {item.options.length > 0 && (
+                  <div className="add-ons">
+                    <ul>
+                      <h4>Options</h4>
+                      {item.options.map(option => (
+                        <li>
+                          {option.optionName}: <span>{option.choiceName}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
               </div>
             ))}
           </div>
