@@ -12,9 +12,10 @@ export default function Item({ item, addToOrder }) {
   const [price, setPrice] = useState(null)
   const [totalPrice, setTotalPrice] = useState(null)
   const [itemSize, setItemSize] = useState(null)
-  const [addOnsPrice, setAddOnsPrice] = useState(null)
+  const [addOnsPrice, setAddOnsPrice] = useState(0)
   const [quantity, setQuantity] = useState(1)
   const [showOptions, setShowOptions] = useState(false)
+  const [optionsPrice, setOptionsPrice] = useState(0)
 
   // handle initial price
   useEffect(() => {
@@ -107,7 +108,7 @@ export default function Item({ item, addToOrder }) {
             onClick={() => setShowOptions(show => !show)}
             style={{ cursor: "pointer" }}
           >
-            Options
+            <span style={{ minWidth: "70px" }}>Options</span>
             <img
               style={{
                 width: "20px",
@@ -119,7 +120,12 @@ export default function Item({ item, addToOrder }) {
             />
           </h5>
           {item.itemOptions.map(option => (
-            <Option option={option} showOptions={showOptions} />
+            <Option
+              option={option}
+              showOptions={showOptions}
+              setOptionsPrice={setAddOnsPrice}
+              itemId={item.id}
+            />
           ))}
         </>
       )}
