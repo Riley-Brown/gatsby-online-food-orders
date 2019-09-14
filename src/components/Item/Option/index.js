@@ -49,20 +49,19 @@ export default function Option({
   }
 
   return (
-    <StyledOption>
-      <div
-        className="option"
-        style={{
-          height:
-            optionHeight && showOptions
-              ? optionHeight
-              : optionHeight
-              ? "0"
-              : null,
-          visibility: !optionHeight && "hidden",
-        }}
-        ref={optionRef}
-      >
+    <StyledOption
+      style={{
+        height:
+          optionHeight && showOptions
+            ? optionHeight
+            : optionHeight
+            ? "0"
+            : null,
+        visibility: !optionHeight && "hidden",
+      }}
+      ref={optionRef}
+    >
+      <div className="option">
         <h5>{option.optionName}</h5>
         <StyledCheckbox>
           <input
