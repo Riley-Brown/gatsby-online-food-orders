@@ -6,9 +6,10 @@ import { StyledCheckbox } from "../../../styles/StyledCheckbox"
 export default function Option({
   option,
   showOptions,
-  setOptionsPrice,
   itemId,
   setOptions,
+  options,
+  index,
 }) {
   const [optionHeight, setOptionHeight] = useState(null)
   const [choice, setChoice] = useState({})
@@ -20,30 +21,29 @@ export default function Option({
   }, [optionRef])
 
   useEffect(() => {
-    if (choice.price) {
-      setOptionsPrice(Number(choice.price))
-    } else {
-      setOptionsPrice(0)
-    }
-  }, [choice])
+    // options without the current index option
+    const filteredOptions = options.filter(option => option.index !== index)
 
-  useEffect(() => {
     if (choice.price) {
-      setOptions([choice])
+      filteredOptions.push(choice)
+      setOptions(filteredOptions)
     } else {
-      setOptions([])
+      setOptions(filteredOptions)
     }
   }, [choice])
 
   const handleOption = e => {
     const { price } = e.target.dataset
-    if (e.target.value === "none") {
+    const { value } = e.target
+
+    if (value === "none") {
       setChoice({})
     } else {
       setChoice({
         optionName: option.optionName,
         price,
         choiceName: e.target.value,
+        index,
       })
     }
   }
@@ -71,6 +71,7 @@ export default function Option({
             value="none"
             name={`${itemId}-${option.optionName}`}
             defaultChecked
+            data-price="0"
           />
           <span className="check-mark" />
           <span>None</span>
