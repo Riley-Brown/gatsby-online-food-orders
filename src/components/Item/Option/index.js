@@ -19,10 +19,18 @@ export default function Option({
     setOptionHeight(optionRef.current.clientHeight)
   }, [optionRef])
 
+  useEffect(() => {
+    if (choice.price) {
+      setOptionsPrice(Number(choice.price))
+    } else {
+      setOptionsPrice(0)
+    }
+  }, [choice])
+
   const handleOption = e => {
     const { price } = e.target.dataset
     if (e.target.value === "none") {
-      setChoice(null)
+      setChoice({})
     } else {
       setChoice({
         optionName: option.optionName,
