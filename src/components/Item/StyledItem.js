@@ -2,6 +2,7 @@ import styled from "styled-components"
 
 export const StyledItem = styled.div`
   flex: 0 0 40%;
+  margin-bottom: 6rem;
   .gatsby-image-wrapper {
     border-radius: 15px;
     max-height: 400px;
