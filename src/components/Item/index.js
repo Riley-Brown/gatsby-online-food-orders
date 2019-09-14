@@ -17,7 +17,7 @@ export default function Item({ item, addToOrder }) {
   const [showOptions, setShowOptions] = useState(false)
   const [optionsPrice, setOptionsPrice] = useState(0)
   const [addOns, setAddOns] = useState(null)
-  // const [options, setOptions] = useState(null)
+  const [options, setOptions] = useState([])
   const [order, setOrder] = useState({})
 
   // handle initial price
@@ -58,6 +58,7 @@ export default function Item({ item, addToOrder }) {
       size: itemSize,
       addOns,
       quantity,
+      options,
     })
   }
 
@@ -137,6 +138,7 @@ export default function Item({ item, addToOrder }) {
               setOptionsPrice={setAddOnsPrice}
               itemId={item.id}
               setOptionsPrice={setOptionsPrice}
+              setOptions={setOptions}
             />
           ))}
         </>
