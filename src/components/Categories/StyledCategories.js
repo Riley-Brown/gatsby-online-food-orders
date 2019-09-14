@@ -4,6 +4,7 @@ export const StyledCategories = styled.div`
   display: flex;
   flex-wrap: wrap;
   flex: 0 0 75%;
+  margin-top: 3rem;
   justify-content: space-around;
   &::after {
     content: "";
