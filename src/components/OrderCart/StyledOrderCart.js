@@ -10,6 +10,8 @@ export const StyledOrderCart = styled.div`
   transform: translateY(-50%);
   background: #fff;
   border-radius: 10px;
+  transition: 200ms;
+  opacity: ${props => (props.loaded ? 1 : 0)};
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 1px 6px;
   .empty-cart {
     div {
@@ -57,7 +59,6 @@ export const StyledOrderCart = styled.div`
     padding: 10px;
     text-align: center;
     color: #fff;
-    /* position: sticky; */
     top: 0;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
