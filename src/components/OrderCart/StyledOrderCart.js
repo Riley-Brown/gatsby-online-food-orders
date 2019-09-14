@@ -11,9 +11,17 @@ export const StyledOrderCart = styled.div`
   background: #fff;
   border-radius: 10px;
   transition: 200ms;
-  opacity: ${props => (props.loaded ? 1 : 0)};
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 1px 6px;
   .empty-cart {
+    animation: 500ms fadeIn;
     div {
       h4 {
         font-size: 2rem;
@@ -37,6 +45,7 @@ export const StyledOrderCart = styled.div`
     }
   }
   .items {
+    animation: 500ms fadeIn;
     overflow-y: auto;
     max-height: 300px;
     &::-webkit-scrollbar-track {
@@ -122,6 +131,7 @@ export const StyledOrderCart = styled.div`
   .total {
     ${row("space-between", "center")};
     padding: 10px 20px;
+    animation: 500ms fadeIn;
     h3 {
       font-size: 2rem;
       margin: 0;
