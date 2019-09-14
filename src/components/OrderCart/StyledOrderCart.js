@@ -57,7 +57,7 @@ export const StyledOrderCart = styled.div`
     padding: 10px;
     text-align: center;
     color: #fff;
-    position: sticky;
+    /* position: sticky; */
     top: 0;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
