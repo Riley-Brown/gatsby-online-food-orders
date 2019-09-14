@@ -8,8 +8,8 @@ import emptyCartSvg from "../../assets/svg/empty-cart.svg"
 export default function OrderCart({ order, removeFromOrder }) {
   const [totalPrice, setTotalPrice] = useState(null)
   const [showFullCart, setShowFullCart] = useState(true)
-  const [cartHeight, setCartHeight] = useState(null)
-  const [cartEmpty, setCartEmpty] = useState(true)
+  const [cartEmpty, setCartEmpty] = useState(false)
+  const [loaded, setLoaded] = useState(false)
 
   const cartRef = useRef(null)
 
@@ -21,26 +21,16 @@ export default function OrderCart({ order, removeFromOrder }) {
       }))
       setTotalPrice(Number(total.price).toFixed(2))
       setCartEmpty(false)
+      setLoaded(true)
     } else {
       setTotalPrice(0)
       setCartEmpty(true)
-    }
-  }, [order])
-
-  // set cart height every order change
-  useEffect(() => {
-    if (cartRef.current) {
-      setCartHeight(cartRef.current.clientHeight)
+      setLoaded(true)
     }
   }, [order])
 
   return (
-    <StyledOrderCart
-      ref={cartRef}
-      style={{
-        transform: !showFullCart ? `translateY(${cartHeight - 50}px)` : null,
-      }}
-    >
+    <StyledOrderCart ref={cartRef} loaded={loaded}>
       <div
         className="order-header"
         onClick={() => !showFullCart && setShowFullCart(true)}
@@ -54,7 +44,7 @@ export default function OrderCart({ order, removeFromOrder }) {
             <h4>Order Empty!</h4>
             <p>Click on any category to start building your order.</p>
           </div>
-          <img className="empty-cart" src={emptyCartSvg}></img>
+          <img src={emptyCartSvg}></img>
         </div>
       ) : (
         <>
