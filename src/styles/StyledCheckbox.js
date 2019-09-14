@@ -5,6 +5,7 @@ export const StyledCheckbox = styled.label`
   margin-bottom: 1.5rem;
   display: block;
   width: 100%;
+  cursor: pointer;
   &:hover {
     .check-mark {
       background: #ccc;
