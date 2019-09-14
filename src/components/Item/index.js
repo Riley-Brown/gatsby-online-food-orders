@@ -18,7 +18,6 @@ export default function Item({ item, addToOrder }) {
   const [optionsPrice, setOptionsPrice] = useState(0)
   const [addOns, setAddOns] = useState(null)
   const [options, setOptions] = useState([])
-  const [order, setOrder] = useState({})
 
   // handle initial price
   useEffect(() => {
@@ -37,7 +36,6 @@ export default function Item({ item, addToOrder }) {
         setTotalPrice(
           ((price + addOnsPrice + optionsPrice) * quantity).toFixed(2)
         )
-        console.log(optionsPrice)
       } else {
         setTotalPrice(item.itemPrice)
       }
@@ -118,12 +116,18 @@ export default function Item({ item, addToOrder }) {
             onClick={() => setShowOptions(show => !show)}
             style={{ cursor: "pointer" }}
           >
-            <span style={{ minWidth: "65px", display: "inline-block" }}>
+            <span
+              style={{
+                minWidth: "73px",
+                display: "inline-block",
+                fontSize: "1.8rem",
+              }}
+            >
               Options
             </span>
             <img
               style={{
-                width: "20px",
+                width: "23px",
                 verticalAlign: "bottom",
                 marginLeft: "0.5rem",
               }}
