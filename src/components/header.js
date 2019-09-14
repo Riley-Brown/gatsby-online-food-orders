@@ -1,32 +1,42 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
 import React from "react"
+import logo from "../assets/img/rawberri-logo-cropped-bg.png"
 
 const Header = ({ siteTitle }) => (
   <header
     style={{
-      background: `rebeccapurple`,
+      background: `#fff`,
       marginBottom: `1.45rem`,
+      position: "sticky",
+      top: "0",
+      background: "#fff",
+      zIndex: "1",
+      boxShadow: "2px 4px 10px rgba(0,0,0,0.2)",
     }}
   >
     <div
       style={{
         margin: `0 auto`,
-        maxWidth: 960,
+        maxWidth: 1400,
         padding: `1.45rem 1.0875rem`,
       }}
     >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
+      <Link
+        to="/"
+        style={{
+          color: `white`,
+          textDecoration: `none`,
+          textAlign: "center",
+          margin: "auto",
+          display: "block",
+        }}
+      >
+        <span>
+          <img src={logo} style={{ margin: 0, height: "70px" }} />
+        </span>
+      </Link>
+      >
     </div>
   </header>
 )
