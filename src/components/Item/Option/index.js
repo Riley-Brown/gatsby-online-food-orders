@@ -28,7 +28,11 @@ export default function Option({
   }, [choice])
 
   useEffect(() => {
-    setOptions([choice])
+    if (choice.price) {
+      setOptions([choice])
+    } else {
+      setOptions([])
+    }
   }, [choice])
 
   const handleOption = e => {
