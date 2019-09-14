@@ -45,7 +45,7 @@ export default function AddOns({ item, setAddOnsPrice, handleUpdateAddOns }) {
         <img src={showAddOns ? minusSvg : plusSvg} alt="" />
       </h5>
       <div
-        className="add-ons"
+        className="add-ons-container"
         style={{
           height:
             addOnsHeight && showAddOns
@@ -57,21 +57,23 @@ export default function AddOns({ item, setAddOnsPrice, handleUpdateAddOns }) {
         }}
         ref={addOnsRef}
       >
-        {item.itemAddOns.map(addOn => (
-          <StyledCheckbox htmlFor={`${item.itemName}-${addOn.addOnName}`}>
-            <input
-              type="checkbox"
-              name={addOn.addOnName}
-              data-price={addOn.addOnPrice}
-              id={`${item.itemName}-${addOn.addOnName}`}
-              value={addOn.addOnName}
-              onChange={handleAddOns}
-            />
-            <span className="check-mark" />
-            <span>{addOn.addOnName}</span>
-            <span>+${addOn.addOnPrice.toFixed(2)}</span>
-          </StyledCheckbox>
-        ))}
+        <div className="add-ons">
+          {item.itemAddOns.map(addOn => (
+            <StyledCheckbox htmlFor={`${item.itemName}-${addOn.addOnName}`}>
+              <input
+                type="checkbox"
+                name={addOn.addOnName}
+                data-price={addOn.addOnPrice}
+                id={`${item.itemName}-${addOn.addOnName}`}
+                value={addOn.addOnName}
+                onChange={handleAddOns}
+              />
+              <span className="check-mark" />
+              <span>{addOn.addOnName}</span>
+              <span>+${addOn.addOnPrice.toFixed(2)}</span>
+            </StyledCheckbox>
+          ))}
+        </div>
       </div>
     </StyledAddOns>
   )
