@@ -55,7 +55,7 @@ export const StyledOrderCart = styled.div`
     }
   }
   .order-header {
-    background: #222;
+    background: var(--secondary);
     padding: 10px;
     text-align: center;
     color: #fff;
