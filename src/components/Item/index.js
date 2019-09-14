@@ -16,6 +16,9 @@ export default function Item({ item, addToOrder }) {
   const [quantity, setQuantity] = useState(1)
   const [showOptions, setShowOptions] = useState(false)
   const [optionsPrice, setOptionsPrice] = useState(0)
+  const [addOns, setAddOns] = useState(null)
+  // const [options, setOptions] = useState(null)
+  const [order, setOrder] = useState({})
 
   // handle initial price
   useEffect(() => {
@@ -30,16 +33,17 @@ export default function Item({ item, addToOrder }) {
   // handle total price
   useEffect(() => {
     const handleTotalPrice = () => {
-      if (addOnsPrice && price) {
-        setTotalPrice(((price + addOnsPrice) * quantity).toFixed(2))
-      } else if (price) {
-        setTotalPrice((price * quantity).toFixed(2))
+      if (price) {
+        setTotalPrice(
+          ((price + addOnsPrice + optionsPrice) * quantity).toFixed(2)
+        )
+        console.log(optionsPrice)
       } else {
         setTotalPrice(item.itemPrice)
       }
     }
     handleTotalPrice()
-  }, [quantity, itemSize, addOnsPrice])
+  }, [quantity, itemSize, addOnsPrice, optionsPrice])
 
   const handleSizeChange = e => {
     const dataset = e.target.options[e.target.selectedIndex].dataset
@@ -47,7 +51,7 @@ export default function Item({ item, addToOrder }) {
     setItemSize(dataset.size)
   }
 
-  const handleAddToOrder = addOns => {
+  const handleAddToOrder = () => {
     addToOrder({
       name: item.itemName,
       price: totalPrice,
@@ -55,6 +59,10 @@ export default function Item({ item, addToOrder }) {
       addOns,
       quantity,
     })
+  }
+
+  const handleUpdateAddOns = addOns => {
+    setAddOns(addOns)
   }
 
   return (
@@ -100,6 +108,7 @@ export default function Item({ item, addToOrder }) {
           setTotalPrice={setTotalPrice}
           itemPrice={price}
           setAddOnsPrice={setAddOnsPrice}
+          handleUpdateAddOns={handleUpdateAddOns}
         />
       )}
       {item.itemOptions && (
@@ -108,7 +117,9 @@ export default function Item({ item, addToOrder }) {
             onClick={() => setShowOptions(show => !show)}
             style={{ cursor: "pointer" }}
           >
-            <span style={{ minWidth: "70px" }}>Options</span>
+            <span style={{ minWidth: "65px", display: "inline-block" }}>
+              Options
+            </span>
             <img
               style={{
                 width: "20px",
@@ -125,12 +136,15 @@ export default function Item({ item, addToOrder }) {
               showOptions={showOptions}
               setOptionsPrice={setAddOnsPrice}
               itemId={item.id}
+              setOptionsPrice={setOptionsPrice}
             />
           ))}
         </>
       )}
 
-      <button className="add-to-order">Add to Order</button>
+      <button className="add-to-order" onClick={handleAddToOrder}>
+        Add to Order
+      </button>
     </StyledItem>
   )
 }
