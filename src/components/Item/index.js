@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useRef } from "react"
 import Img from "gatsby-image"
 import { StyledItem } from "./StyledItem"
+import { useSelector, useDispatch } from "react-redux"
 
 import AddOns from "./AddOns"
 import Option from "./Option"
 
 import plusSvg from "../../assets/svg/plus.svg"
 import minusSvg from "../../assets/svg/minus.svg"
+
+import { toggleShow } from "../../state/app"
 
 export default function Item({ item, addToOrder }) {
   const [price, setPrice] = useState(null)
@@ -88,6 +91,7 @@ export default function Item({ item, addToOrder }) {
             <select name="" id="select-size" onChange={handleSizeChange}>
               {item.itemSizes.map(size => (
                 <option
+                  key={size.size}
                   value={size.size}
                   data-size={size.size}
                   data-price={size.sizePrice}
@@ -150,6 +154,7 @@ export default function Item({ item, addToOrder }) {
           </h5>
           {item.itemOptions.map((option, index) => (
             <Option
+              key={index}
               option={option}
               showOptions={showOptions}
               setOptionsPrice={setAddOnsPrice}
