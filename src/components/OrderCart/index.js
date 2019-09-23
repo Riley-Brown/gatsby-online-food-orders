@@ -51,7 +51,7 @@ export default function OrderCart({ order, removeFromOrder }) {
           <div className="items">
             {order
               .map((item, index) => (
-                <div className="item">
+                <div className="item" key={index}>
                   <div className="item-name">
                     <h1>
                       {item.quantity} {item.size} {item.name}

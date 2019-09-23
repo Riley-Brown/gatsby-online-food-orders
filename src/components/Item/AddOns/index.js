@@ -59,7 +59,10 @@ export default function AddOns({ item, setAddOnsPrice, handleUpdateAddOns }) {
       >
         <div className="add-ons">
           {item.itemAddOns.map(addOn => (
-            <StyledCheckbox htmlFor={`${item.itemName}-${addOn.addOnName}`}>
+            <StyledCheckbox
+              htmlFor={`${item.itemName}-${addOn.addOnName}`}
+              key={`${item.itemName}-${addOn.addOnName}`}
+            >
               <input
                 type="checkbox"
                 name={addOn.addOnName}

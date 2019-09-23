@@ -35,7 +35,7 @@ export default function Category({ data }) {
         <h1>{data.contentfulCategory.categoryName}</h1>
         <div className="category-container">
           {data.contentfulCategory.item.map(item => (
-            <Item item={item} addToOrder={addToOrder} />
+            <Item key={item.id} item={item} addToOrder={addToOrder} />
           ))}
         </div>
       </StyledCategory>

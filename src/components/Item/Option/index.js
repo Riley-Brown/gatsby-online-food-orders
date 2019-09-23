@@ -76,7 +76,10 @@ export default function Option({
           <span>None</span>
         </StyledCheckbox>
         {option.optionChoice.map(choice => (
-          <StyledCheckbox htmlFor={`${itemId}-${choice.choiceName}`}>
+          <StyledCheckbox
+            htmlFor={`${itemId}-${choice.choiceName}`}
+            key={`${itemId}-${choice.choiceName}`}
+          >
             <input
               type="radio"
               name={`${itemId}-${option.optionName}`}

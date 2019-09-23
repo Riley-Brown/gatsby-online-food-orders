@@ -27,7 +27,7 @@ export default function Categories() {
   return (
     <StyledCategories>
       {edges.map(edge => (
-        <div className="category">
+        <div className="category" key={edge.node.id}>
           <Link to={`/${edge.node.slug}`}>
             <Img fluid={edge.node.categoryImage.fluid} />
             <h1>{edge.node.categoryName}</h1>
