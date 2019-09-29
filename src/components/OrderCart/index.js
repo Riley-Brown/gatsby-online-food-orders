@@ -1,17 +1,24 @@
 import React, { useEffect, useState, useRef } from "react"
 import { StyledOrderCart } from "./StyledOrderCart"
-import deleteIcon from "../../assets/svg/delete.svg"
-import chevronUp from "../../assets/svg/chevron-up.svg"
-import chevronDown from "../../assets/svg/chevron-down.svg"
-import emptyCartSvg from "../../assets/svg/empty-cart.svg"
+import deleteIcon from "assets/svg/delete.svg"
+import chevronUp from "assets/svg/chevron-up.svg"
+import chevronDown from "assets/svg/chevron-down.svg"
+import emptyCartSvg from "assets/svg/empty-cart.svg"
+
+import { useSelector, useDispatch } from "react-redux"
+
+import { setOrder, setShowCart } from "state/actions"
 
 export default function OrderCart({ order, removeFromOrder }) {
   const [totalPrice, setTotalPrice] = useState(null)
-  const [showFullCart, setShowFullCart] = useState(true)
   const [cartEmpty, setCartEmpty] = useState(false)
   const [loaded, setLoaded] = useState(false)
 
   const cartRef = useRef(null)
+
+  const dispatch = useDispatch()
+  const orderState = useSelector(state => state.globalState.order)
+  const show = useSelector(state => state.globalState.show)
 
   // calculate total price every order change
   useEffect(() => {
@@ -30,13 +37,21 @@ export default function OrderCart({ order, removeFromOrder }) {
   }, [order])
 
   return (
-    <StyledOrderCart ref={cartRef} loaded={loaded}>
+    <StyledOrderCart
+      ref={cartRef}
+      loaded={loaded}
+      style={{
+        transform: show ? "translateY(-50%)" : "translateY(calc(350px))",
+        bottom: show ? "initial" : 0,
+        top: show ? "50%" : "initial",
+      }}
+    >
       <div
         className="order-header"
-        onClick={() => !showFullCart && setShowFullCart(true)}
-        style={{ cursor: !showFullCart && "pointer" }}
+        onClick={() => dispatch(setShowCart(!show))}
       >
         <h2 className="order-title">Your Order</h2>
+        <img src={show ? chevronDown : chevronUp} alt="toggle cart" />
       </div>
       {cartEmpty ? (
         <div className="empty-cart">
