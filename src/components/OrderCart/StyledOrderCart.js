@@ -71,6 +71,14 @@ export const StyledOrderCart = styled.div`
     top: 0;
     border-top-left-radius: 10px;
     border-top-right-radius: 10px;
+    position: relative;
+    cursor: pointer;
+    img {
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
     h2 {
       font-size: 2.2rem;
     }
