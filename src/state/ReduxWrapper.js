@@ -1,7 +1,7 @@
 import React from "react"
 import { Provider } from "react-redux"
 import { createStore, compose } from "redux"
-import rootReducer from "."
+import rootReducer from "./rootReducer"
 
 let store
 
@@ -15,7 +15,5 @@ if (process.env.NODE_ENV === "development") {
 } else {
   store = createStore(rootReducer)
 }
-
-// const createStore = () => reduxCreateStore(rootReducer)
 
 export default ({ element }) => <Provider store={store}>{element}</Provider>
