@@ -5,7 +5,7 @@ import rootReducer from "./rootReducer"
 
 let store
 
-if (process.env.NODE_ENV === "development") {
+if (process.env.NODE_ENV === "development" && typeof window !== "undefined") {
   console.log("Dev mode detected, enabling redux extension")
 
   const composeEnhancers =
