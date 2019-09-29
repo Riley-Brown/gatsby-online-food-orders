@@ -9,7 +9,7 @@ import Option from "./Option"
 import plusSvg from "../../assets/svg/plus.svg"
 import minusSvg from "../../assets/svg/minus.svg"
 
-import { toggleShow } from "../../state/app"
+// import { toggleShow } from "../../state/global"
 
 export default function Item({ item, addToOrder }) {
   const [price, setPrice] = useState(null)
