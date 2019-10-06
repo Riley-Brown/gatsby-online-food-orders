@@ -1,4 +1,4 @@
 import { combineReducers } from "redux"
-import globalState from "./global"
+import global from "./global"
 
-export default combineReducers({ globalState })
+export default combineReducers({ global })
