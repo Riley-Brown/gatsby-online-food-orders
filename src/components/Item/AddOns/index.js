@@ -38,12 +38,12 @@ export default function AddOns({ item, setAddOnsPrice, handleUpdateAddOns }) {
 
   return (
     <StyledAddOns>
-      <h5 onClick={() => setShowAddOns(show => !show)}>
+      <button onClick={() => setShowAddOns(show => !show)}>
         <span style={{ minWidth: "65px", display: "inline-block" }}>
           Add Ons
         </span>
         <img src={showAddOns ? minusSvg : plusSvg} alt="" />
-      </h5>
+      </button>
       <div
         className="add-ons-container"
         style={{

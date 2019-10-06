@@ -135,9 +135,9 @@ export default function Item({ item }) {
       )}
       {item.itemOptions && (
         <>
-          <h5
+          <button
             onClick={() => setShowOptions(show => !show)}
-            style={{ cursor: "pointer" }}
+            style={{ cursor: "pointer", padding: "10px 0" }}
           >
             <span
               style={{
@@ -157,7 +157,7 @@ export default function Item({ item }) {
               src={showOptions ? minusSvg : plusSvg}
               alt=""
             />
-          </h5>
+          </button>
           {item.itemOptions.map((option, index) => (
             <Option
               key={index}
