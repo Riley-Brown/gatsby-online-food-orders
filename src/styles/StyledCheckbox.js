@@ -5,10 +5,20 @@ export const StyledCheckbox = styled.label`
   margin-bottom: 1.5rem;
   display: block;
   width: 100%;
+  padding: 10px;
   cursor: pointer;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
   &:hover {
+    background: #f6f6f6;
     .check-mark {
       background: #ccc;
+    }
+  }
+  &:focus-within {
+    .check-mark {
+      outline: rgb(59, 153, 252) auto 5px;
     }
   }
   span:nth-of-type(2) {
@@ -30,7 +40,8 @@ export const StyledCheckbox = styled.label`
   }
   .check-mark {
     position: absolute;
-    top: 0;
+    top: 50%;
+    transform: translateY(-50%);
     left: 0;
     height: 25px;
     width: 25px;
