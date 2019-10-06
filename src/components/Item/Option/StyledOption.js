@@ -13,6 +13,7 @@ export const StyledOption = styled.div`
     h5 {
       margin-bottom: 1rem;
       font-weight: 500;
+      padding: 10px 0;
     }
   }
 `

@@ -1,9 +1,10 @@
 import styled from "styled-components"
 
 export const StyledAddOns = styled.div`
-  h5 {
+  button {
     color: #333;
     cursor: pointer;
+    padding: 10px 0;
     span {
       font-size: 1.8rem;
       width: 73px;
