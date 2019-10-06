@@ -7,9 +7,9 @@ import emptyCartSvg from "assets/svg/empty-cart.svg"
 
 import { useSelector, useDispatch } from "react-redux"
 
-import { setOrder, setShowCart } from "state/actions"
+import { setOrder, setShowCart, removeFromOrder } from "state/actions"
 
-export default function OrderCart({ order, removeFromOrder }) {
+export default function OrderCart() {
   const [totalPrice, setTotalPrice] = useState(null)
   const [cartEmpty, setCartEmpty] = useState(false)
   const [loaded, setLoaded] = useState(false)
@@ -17,8 +17,21 @@ export default function OrderCart({ order, removeFromOrder }) {
   const cartRef = useRef(null)
 
   const dispatch = useDispatch()
-  const orderState = useSelector(state => state.globalState.order)
-  const show = useSelector(state => state.globalState.show)
+
+  const show = useSelector(state => state.global.show)
+  const order = useSelector(state => state.global.order)
+
+  useEffect(() => {
+    if (order.length === 0) {
+      console.log(order)
+      // set initial order from local storage
+      const localStorageOrder = localStorage.getItem("order")
+      if (localStorageOrder && localStorageOrder.length > 0) {
+        console.log(localStorageOrder, localStorageOrder.length)
+        dispatch(setOrder(JSON.parse(localStorageOrder)))
+      }
+    }
+  }, [])
 
   // calculate total price every order change
   useEffect(() => {
@@ -34,6 +47,9 @@ export default function OrderCart({ order, removeFromOrder }) {
       setCartEmpty(true)
       setLoaded(true)
     }
+
+    // update local storage every order change
+    localStorage.setItem("order", JSON.stringify(order))
   }, [order])
 
   return (
@@ -74,7 +90,7 @@ export default function OrderCart({ order, removeFromOrder }) {
                     <div className="item-price">
                       <span>${item.price}</span>
                       <img
-                        onClick={() => removeFromOrder(index)}
+                        onClick={() => dispatch(removeFromOrder(index))}
                         src={deleteIcon}
                         alt="Delete Item"
                       />
