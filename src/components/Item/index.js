@@ -9,9 +9,11 @@ import Option from "./Option"
 import plusSvg from "../../assets/svg/plus.svg"
 import minusSvg from "../../assets/svg/minus.svg"
 
+import { addToOrder } from "state/actions"
+
 // import { toggleShow } from "../../state/global"
 
-export default function Item({ item, addToOrder }) {
+export default function Item({ item }) {
   const [price, setPrice] = useState(null)
   const [totalPrice, setTotalPrice] = useState(null)
   const [itemSize, setItemSize] = useState(null)
@@ -21,6 +23,8 @@ export default function Item({ item, addToOrder }) {
   const [optionsPrice, setOptionsPrice] = useState(0)
   const [addOns, setAddOns] = useState(null)
   const [options, setOptions] = useState([])
+
+  const dispatch = useDispatch()
 
   // handle initial price
   useEffect(() => {
@@ -66,14 +70,16 @@ export default function Item({ item, addToOrder }) {
   }
 
   const handleAddToOrder = () => {
-    addToOrder({
-      name: item.itemName,
-      price: totalPrice,
-      size: itemSize,
-      addOns,
-      quantity,
-      options,
-    })
+    dispatch(
+      addToOrder({
+        name: item.itemName,
+        price: totalPrice,
+        size: itemSize,
+        addOns,
+        quantity,
+        options,
+      })
+    )
   }
 
   const handleUpdateAddOns = addOns => {
