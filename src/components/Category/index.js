@@ -4,11 +4,14 @@ import { StyledCategory } from "./StyledCategory"
 import Item from "../Item"
 import Layout from "../layout"
 import OrderCart from "../OrderCart"
+import { useSelector } from "react-redux"
 
 export default function Category({ data }) {
+  const showCart = useSelector(state => state.global.show)
+
   return (
     <Layout>
-      <StyledCategory>
+      <StyledCategory showCart={showCart}>
         <h1>{data.contentfulCategory.categoryName}</h1>
         <div className="category-container">
           {data.contentfulCategory.item.map(item => (

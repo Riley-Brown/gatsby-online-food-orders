@@ -3,8 +3,10 @@ import { useStaticQuery, graphql } from "gatsby"
 import { StyledCategories } from "./StyledCategories"
 import Img from "gatsby-image"
 import { Link } from "gatsby"
+import { useSelector } from "react-redux"
 
 export default function Categories() {
+  const showCart = useSelector(state => state.global.show)
   const categories = useStaticQuery(graphql`
     query CategoriesQuery {
       allContentfulCategory {
@@ -25,7 +27,7 @@ export default function Categories() {
   `)
   const { edges } = categories.allContentfulCategory
   return (
-    <StyledCategories>
+    <StyledCategories showCart={showCart}>
       {edges.map(edge => (
         <div className="category" key={edge.node.id}>
           <Link to={`/${edge.node.slug}`}>

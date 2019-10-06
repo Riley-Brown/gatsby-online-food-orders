@@ -1,8 +1,9 @@
 import styled from "styled-components"
 
 export const StyledCategory = styled.div`
-  flex: 0 0 75%;
+  flex: ${props => (props.showCart ? "0 0 75%" : "1 1 100%")};
   margin-top: 3rem;
+  transition: 300ms;
   .category-container {
     display: flex;
     flex-wrap: wrap;
