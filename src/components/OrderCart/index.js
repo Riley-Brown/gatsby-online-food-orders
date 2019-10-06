@@ -12,7 +12,6 @@ import { setOrder, setShowCart, removeFromOrder } from "state/actions"
 export default function OrderCart() {
   const [totalPrice, setTotalPrice] = useState(null)
   const [cartEmpty, setCartEmpty] = useState(false)
-  const [loaded, setLoaded] = useState(false)
 
   const cartRef = useRef(null)
 
@@ -41,11 +40,9 @@ export default function OrderCart() {
       }))
       setTotalPrice(Number(total.price).toFixed(2))
       setCartEmpty(false)
-      setLoaded(true)
     } else {
       setTotalPrice(0)
       setCartEmpty(true)
-      setLoaded(true)
     }
 
     // update local storage every order change
@@ -55,7 +52,6 @@ export default function OrderCart() {
   return (
     <StyledOrderCart
       ref={cartRef}
-      loaded={loaded}
       style={{
         transform: show ? "translateY(-50%)" : "translateY(calc(350px))",
         bottom: show ? "initial" : 0,
