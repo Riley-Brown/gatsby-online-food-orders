@@ -22,12 +22,11 @@ export default function OrderCart() {
 
   useEffect(() => {
     if (order.length === 0) {
-      console.log(order)
       // set initial order from local storage
-      const localStorageOrder = localStorage.getItem("order")
+      const localStorageOrder = JSON.parse(localStorage.getItem("order"))
       if (localStorageOrder && localStorageOrder.length > 0) {
         console.log(localStorageOrder, localStorageOrder.length)
-        dispatch(setOrder(JSON.parse(localStorageOrder)))
+        dispatch(setOrder(localStorageOrder))
       }
     }
   }, [])
