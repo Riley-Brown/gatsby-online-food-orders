@@ -2,14 +2,7 @@ import styled from "styled-components"
 import { row } from "../../styles/shared"
 
 export const StyledOrderCart = styled.div`
-  position: fixed;
-  right: 50px;
-  width: 380px;
-  height: 400px;
-  top: 50%;
-  transform: translateY(-50%);
-  background: #fff;
-  border-radius: 10px;
+  width: ${props => (props.showCart ? "450px" : 0)};
   transition: 200ms;
   @keyframes fadeIn {
     from {
@@ -19,7 +12,22 @@ export const StyledOrderCart = styled.div`
       opacity: 1;
     }
   }
-  box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 1px 6px;
+  .cart-wrapper {
+    position: fixed;
+    right: 50px;
+    width: 380px;
+    height: 400px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: #fff;
+    border-radius: 10px;
+    transition: 200ms;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 1px 6px;
+    /* @media (max-width: 1280px) {
+      width: calc(100% - 75%);
+    } */
+  }
+
   .empty-cart {
     animation: 500ms fadeIn;
     div {

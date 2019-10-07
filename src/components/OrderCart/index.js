@@ -49,84 +49,86 @@ export default function OrderCart() {
   }, [order])
 
   return (
-    <StyledOrderCart
-      ref={cartRef}
-      style={{
-        transform: show ? "translateY(-50%)" : "translateY(calc(350px))",
-        bottom: show ? "initial" : 0,
-        top: show ? "50%" : "initial",
-      }}
-    >
+    <StyledOrderCart ref={cartRef} showCart={show}>
       <div
-        className="order-header"
-        onClick={() => dispatch(setShowCart(!show))}
+        className="cart-wrapper"
+        style={{
+          transform: show ? "translateY(-50%)" : "translateY(calc(350px))",
+          bottom: show ? "initial" : 0,
+          top: show ? "50%" : "initial",
+        }}
       >
-        <h2 className="order-title">Your Order</h2>
-        <img src={show ? chevronDown : chevronUp} alt="toggle cart" />
-      </div>
-      {cartEmpty ? (
-        <div className="empty-cart">
-          <div>
-            <h4>Order Empty!</h4>
-            <p>Click on any category to start building your order.</p>
-          </div>
-          <img src={emptyCartSvg}></img>
+        <div
+          className="order-header"
+          onClick={() => dispatch(setShowCart(!show))}
+        >
+          <h2 className="order-title">Your Order</h2>
+          <img src={show ? chevronDown : chevronUp} alt="toggle cart" />
         </div>
-      ) : (
-        <>
-          <div className="items">
-            {order
-              .map((item, index) => (
-                <div className="item" key={index}>
-                  <div className="item-name">
-                    <h1>
-                      {item.quantity} {item.size} {item.name}
-                    </h1>
-                    <div className="item-price">
-                      <span>${item.price}</span>
-                      <img
-                        onClick={() => dispatch(removeFromOrder(index))}
-                        src={deleteIcon}
-                        alt="Delete Item"
-                      />
+        {cartEmpty ? (
+          <div className="empty-cart">
+            <div>
+              <h4>Order Empty!</h4>
+              <p>Click on any category to start building your order.</p>
+            </div>
+            <img src={emptyCartSvg}></img>
+          </div>
+        ) : (
+          <>
+            <div className="items">
+              {order
+                .map((item, index) => (
+                  <div className="item" key={index}>
+                    <div className="item-name">
+                      <h1>
+                        {item.quantity} {item.size} {item.name}
+                      </h1>
+                      <div className="item-price">
+                        <span>${item.price}</span>
+                        <img
+                          onClick={() => dispatch(removeFromOrder(index))}
+                          src={deleteIcon}
+                          alt="Delete Item"
+                        />
+                      </div>
                     </div>
+                    {/* Add Ons */}
+                    {item.addOns.length > 0 && (
+                      <div className="add-ons">
+                        <ul>
+                          <h4>Add Ons</h4>
+                          {item.addOns.map(addOn => (
+                            <li>{addOn}</li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
+                    {/* Options */}
+                    {item.options.length > 0 && (
+                      <div className="add-ons">
+                        <ul>
+                          <h4>Options</h4>
+                          {item.options.map(option => (
+                            <li>
+                              {option.optionName}:{" "}
+                              <span>{option.choiceName}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
                   </div>
-                  {/* Add Ons */}
-                  {item.addOns.length > 0 && (
-                    <div className="add-ons">
-                      <ul>
-                        <h4>Add Ons</h4>
-                        {item.addOns.map(addOn => (
-                          <li>{addOn}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                  {/* Options */}
-                  {item.options.length > 0 && (
-                    <div className="add-ons">
-                      <ul>
-                        <h4>Options</h4>
-                        {item.options.map(option => (
-                          <li>
-                            {option.optionName}:{" "}
-                            <span>{option.choiceName}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              ))
-              .reverse()}
-          </div>
-          <hr />
-          <div className="total">
-            <h3>Total</h3>
-            <span>${totalPrice}</span>
-          </div>
-        </>
-      )}
+                ))
+                .reverse()}
+            </div>
+            <hr />
+            <div className="total">
+              <h3>Total</h3>
+              <span>${totalPrice}</span>
+            </div>
+          </>
+        )}
+      </div>
     </StyledOrderCart>
   )
 }
