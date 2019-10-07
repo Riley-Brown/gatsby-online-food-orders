@@ -8,9 +8,9 @@ export const StyledCategory = styled.div`
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    &::after {
+    /* &::after {
       content: "";
       width: 40%;
-    }
+    } */
   }
 `
