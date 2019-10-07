@@ -4,7 +4,7 @@ export const StyledCategories = styled.div`
   display: flex;
   flex-wrap: wrap;
   margin-top: 3rem;
-  flex: ${props => (props.showCart ? "0 0 75%" : "1 1 100%")};
+  flex: ${props => (props.showCart ? "0 1 75%" : "1 1 100%")};
   transition: 300ms;
   justify-content: space-around;
   &::after {
