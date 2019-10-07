@@ -1,6 +1,6 @@
 import styled from "styled-components"
 
-export const StyledNav = styled.header`
+export const StyledNav = styled.nav`
   background: #fff;
   margin-bottom: 1.45rem;
   position: sticky;
