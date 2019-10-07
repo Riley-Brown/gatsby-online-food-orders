@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const StyledCategory = styled.div`
-  flex: ${props => (props.showCart ? "0 0 75%" : "1 1 100%")};
+  flex: ${props => (props.showCart ? "0 1 75%" : "1 1 100%")};
   margin-top: 3rem;
   transition: 300ms;
   .category-container {
