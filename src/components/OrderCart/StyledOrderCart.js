@@ -3,7 +3,7 @@ import { row } from "../../styles/shared"
 
 export const StyledOrderCart = styled.div`
   width: ${props => (props.showCart ? "500px" : 0)};
-  transition: 200ms;
+  /* transition: 200ms; */
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -11,6 +11,18 @@ export const StyledOrderCart = styled.div`
     to {
       opacity: 1;
     }
+  }
+  @media (max-width: 960px) {
+    width: ${props => (props.showCart ? "100%" : "0")};
+    position: ${props => (props.showCart ? "fixed" : "static")};
+    background: ${props => (props.showCart ? "rgba(0, 0, 0, 0.5)" : "none")};
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: ${props => (props.showCart ? 22 : 0)};
+    /* transform: ${props =>
+      props.showCart ? "transform(0, 0)" : "transform()"} */
   }
   .cart-wrapper {
     position: fixed;
@@ -23,9 +35,21 @@ export const StyledOrderCart = styled.div`
     border-radius: 10px;
     transition: 200ms;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 1px 6px;
-    /* @media (max-width: 1280px) {
-      width: calc(100% - 75%);
-    } */
+    transform: ${props =>
+      props.showCart ? "translateY(-50%)" : "translateY(calc(350px))"};
+    bottom: ${props => (props.showCart ? "initial" : 0)};
+    top: ${props => (props.showCart ? "50%" : "initial")};
+    @media (max-width: 960px) {
+      /* right: initial;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      bottom: 0; */
+      left: 50%;
+      transform: ${props =>
+        props.showCart ? "translate(-50%, -50%)" : "translate(-50%, 350px)"};
+        width: 450px;
+    }
+    /* transform: translate(-50%, -50%); */
   }
 
   .empty-cart {
