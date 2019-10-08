@@ -16,7 +16,6 @@ export default function OrderCart() {
   const cartRef = useRef(null)
 
   const dispatch = useDispatch()
-
   const show = useSelector(state => state.global.show)
   const order = useSelector(state => state.global.order)
 
@@ -29,7 +28,17 @@ export default function OrderCart() {
         dispatch(setOrder(localStorageOrder))
       }
     }
+    setInitialCartShow()
   }, [])
+
+  const mq =
+    typeof window !== "undefined" && window.matchMedia("(max-width: 960px)")
+
+  const setInitialCartShow = () => {
+    if (mq.matches) {
+      dispatch(setShowCart(false))
+    }
+  }
 
   // calculate total price every order change
   useEffect(() => {
@@ -43,21 +52,13 @@ export default function OrderCart() {
       setTotalPrice(0)
       setCartEmpty(true)
     }
-
     // update local storage every order change
     localStorage.setItem("order", JSON.stringify(order))
   }, [order])
 
   return (
     <StyledOrderCart ref={cartRef} showCart={show}>
-      <div
-        className="cart-wrapper"
-        style={{
-          transform: show ? "translateY(-50%)" : "translateY(calc(350px))",
-          bottom: show ? "initial" : 0,
-          top: show ? "50%" : "initial",
-        }}
-      >
+      <div className="cart-wrapper">
         <div
           className="order-header"
           onClick={() => dispatch(setShowCart(!show))}
