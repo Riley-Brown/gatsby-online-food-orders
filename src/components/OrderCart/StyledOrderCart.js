@@ -3,7 +3,6 @@ import { row } from "../../styles/shared"
 
 export const StyledOrderCart = styled.div`
   width: ${props => (props.showCart ? "500px" : 0)};
-  /* transition: 200ms; */
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -21,8 +20,6 @@ export const StyledOrderCart = styled.div`
     left: 0;
     right: 0;
     z-index: ${props => (props.showCart ? 22 : 0)};
-    /* transform: ${props =>
-      props.showCart ? "transform(0, 0)" : "transform()"} */
   }
   .cart-wrapper {
     position: fixed;
@@ -40,16 +37,14 @@ export const StyledOrderCart = styled.div`
     bottom: ${props => (props.showCart ? "initial" : 0)};
     top: ${props => (props.showCart ? "50%" : "initial")};
     @media (max-width: 960px) {
-      /* right: initial;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      bottom: 0; */
       left: 50%;
       transform: ${props =>
         props.showCart ? "translate(-50%, -50%)" : "translate(-50%, 350px)"};
-        width: 450px;
+      width: 450px;
     }
-    /* transform: translate(-50%, -50%); */
+    @media (max-width: 500px) {
+      width: 95%;
+    }
   }
 
   .empty-cart {
