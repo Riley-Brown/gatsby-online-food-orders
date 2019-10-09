@@ -1,8 +1,13 @@
 import styled from "styled-components"
 
 export const StyledItem = styled.div`
-  flex: 0 0 40%;
+  flex: 0 1 40%;
   margin-bottom: 6rem;
+  min-width: 380px;
+  @media (max-width: 800px) {
+    flex: 0 1 90%;
+    min-width: initial;
+  }
   .gatsby-image-wrapper {
     border-radius: 15px;
     max-height: 400px;
