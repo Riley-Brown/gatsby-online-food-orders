@@ -1,10 +1,10 @@
 import React, { useEffect, useState, useRef } from "react"
 
-import plusSvg from "../../../assets/svg/plus.svg"
-import minusSvg from "../../../assets/svg/minus.svg"
+import plusSvg from "assets/svg/plus.svg"
+import minusSvg from "assets/svg/minus.svg"
 
 import { StyledAddOns } from "./StyledAddOns"
-import { StyledCheckbox } from "../../../styles/StyledCheckbox"
+import { StyledCheckbox } from "styles/StyledCheckbox"
 
 export default function AddOns({ item, setAddOnsPrice, handleUpdateAddOns }) {
   const [showAddOns, setShowAddOns] = useState(false)
