@@ -28,15 +28,17 @@ export default function OrderCart() {
         dispatch(setOrder(localStorageOrder))
       }
     }
-    setInitialCartShow()
+    mq.addListener(handleToggleCart)
   }, [])
 
   const mq =
     typeof window !== "undefined" && window.matchMedia("(max-width: 960px)")
 
-  const setInitialCartShow = () => {
+  const handleToggleCart = () => {
     if (mq.matches) {
       dispatch(setShowCart(false))
+    } else {
+      dispatch(setShowCart(true))
     }
   }
 
