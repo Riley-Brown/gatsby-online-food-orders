@@ -16,6 +16,7 @@ export const StyledCategory = styled.div`
     @media (max-width: 800px) {
       text-align: center;
       justify-content: center;
+      margin-left: 0px;
     }
     a,
     h1 {
