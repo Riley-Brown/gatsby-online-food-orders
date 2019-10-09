@@ -5,8 +5,11 @@ import {
   REMOVE_FROM_ORDER,
 } from "./actions"
 
+const mq =
+  typeof window !== "undefined" && window.matchMedia("(max-width: 960px)")
+
 const initialState = {
-  show: true,
+  show: mq.matches ? false : true,
   order: [],
 }
 
