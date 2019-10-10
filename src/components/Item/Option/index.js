@@ -69,7 +69,6 @@ export default function Option({
             onChange={handleOption}
             value="none"
             name={`${itemId}-${option.optionName}`}
-            defaultChecked
             data-price="0"
           />
           <span className="check-mark" />
