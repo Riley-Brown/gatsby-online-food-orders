@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react"
+
 import { StyledOrderCart } from "./StyledOrderCart"
 import deleteIcon from "assets/svg/delete.svg"
 import chevronUp from "assets/svg/chevron-up.svg"
@@ -12,6 +13,7 @@ import { setOrder, setShowCart, removeFromOrder } from "state/actions"
 export default function OrderCart() {
   const [totalPrice, setTotalPrice] = useState(null)
   const [cartEmpty, setCartEmpty] = useState(false)
+  const [loaded, setLoaded] = useState(false)
 
   const cartRef = useRef(null)
 
@@ -29,6 +31,8 @@ export default function OrderCart() {
       }
     }
     mq.addListener(handleToggleCart)
+
+    handleToggleCart()
   }, [])
 
   const mq =
@@ -40,6 +44,7 @@ export default function OrderCart() {
     } else {
       dispatch(setShowCart(true))
     }
+    setLoaded(true)
   }
 
   // calculate total price every order change
@@ -59,7 +64,7 @@ export default function OrderCart() {
   }, [order])
 
   return (
-    <StyledOrderCart ref={cartRef} showCart={show}>
+    <StyledOrderCart ref={cartRef} showCart={show} loaded={loaded}>
       <div className="cart-wrapper">
         <div
           className="order-header"
