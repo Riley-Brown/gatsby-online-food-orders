@@ -3,6 +3,7 @@ import { row } from "../../styles/shared"
 
 export const StyledOrderCart = styled.div`
   width: ${props => (props.showCart ? "500px" : 0)};
+  visibility: ${props => (!props.loaded ? "hidden" : "visible")};
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -30,10 +31,10 @@ export const StyledOrderCart = styled.div`
     transform: translateY(-50%);
     background: #fff;
     border-radius: 10px;
-    transition: 200ms;
+    transition: ${props => (props.loaded ? "200ms" : 0)};
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 1px 6px;
     transform: ${props =>
-      props.showCart ? "translateY(-50%)" : "translateY(calc(350px))"};
+      props.showCart ? "translateY(-50%)" : "translateY(350px)"};
     bottom: ${props => (props.showCart ? "initial" : 0)};
     top: ${props => (props.showCart ? "50%" : "initial")};
     @media (max-width: 960px) {
@@ -61,6 +62,13 @@ export const StyledOrderCart = styled.div`
       top: 85px;
       left: 25px;
       width: 40%;
+      @media (max-width: 960px) {
+        left: 50px;
+        top: 120px;
+      }
+      @media (max-width: 450px) {
+        left: 20px;
+      }
     }
     img {
       width: 100%;
@@ -69,6 +77,7 @@ export const StyledOrderCart = styled.div`
       display: block;
       position: absolute;
       bottom: 0px;
+      max-height: 330px;
     }
   }
   .items {
