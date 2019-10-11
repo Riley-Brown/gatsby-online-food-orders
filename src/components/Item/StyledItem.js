@@ -25,14 +25,21 @@ export const StyledItem = styled.div`
     h5 {
       font-size: inherit;
       color: #333;
+      margin-bottom: 1rem;
     }
     div {
       display: flex;
+      flex-wrap: wrap;
+      margin-left: 1rem;
       select {
         border: 1px solid #ccc;
         padding: 5px;
         border-radius: 4px;
         margin-right: 1rem;
+        margin-bottom: 1rem;
+        @media (max-width: 500px) {
+          width: 100%;
+        }
       }
     }
   }
