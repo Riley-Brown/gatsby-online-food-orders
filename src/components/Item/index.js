@@ -6,8 +6,9 @@ import { useSelector, useDispatch } from "react-redux"
 import AddOns from "./AddOns"
 import Option from "./Option"
 
-import plusSvg from "../../assets/svg/plus.svg"
-import minusSvg from "../../assets/svg/minus.svg"
+import plusSvg from "assets/svg/plus.svg"
+import minusSvg from "assets/svg/minus.svg"
+import checkMarkSvg from "assets/svg/checkmark.svg"
 
 import { addToOrder } from "state/actions"
 
@@ -23,6 +24,7 @@ export default function Item({ item }) {
   const [optionsPrice, setOptionsPrice] = useState(0)
   const [addOns, setAddOns] = useState(null)
   const [options, setOptions] = useState([])
+  const [addSuccess, setAddSuccess] = useState(false)
 
   const dispatch = useDispatch()
 
@@ -52,11 +54,9 @@ export default function Item({ item }) {
 
   useEffect(() => {
     if (options.length > 0) {
-      console.log("ayyy lmao")
       const optionsTotal = options.reduce((a, b) => ({
         price: Number(a.price) + Number(b.price),
       }))
-      console.log(optionsTotal.price, "????")
       setOptionsPrice(Number(optionsTotal.price))
     } else {
       setOptionsPrice(0)
@@ -80,6 +80,8 @@ export default function Item({ item }) {
         options,
       })
     )
+    setAddSuccess(true)
+    setTimeout(() => setAddSuccess(false), 3000)
   }
 
   const handleUpdateAddOns = addOns => {
@@ -174,8 +176,18 @@ export default function Item({ item }) {
         </>
       )}
 
-      <button className="add-to-order" onClick={handleAddToOrder}>
+      <button
+        className="add-to-order"
+        data-bounce={addSuccess}
+        onClick={handleAddToOrder}
+      >
         Add to Order
+        {addSuccess && (
+          <img
+            style={{ height: "15px", marginLeft: "10px" }}
+            src={checkMarkSvg}
+          />
+        )}
       </button>
     </StyledItem>
   )
