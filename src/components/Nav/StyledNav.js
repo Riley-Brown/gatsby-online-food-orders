@@ -14,6 +14,9 @@ export const StyledNav = styled.nav`
     padding: 1.45rem 1.0875rem;
     img {
       height: 70px;
+      @media (max-width: 960px) {
+        height: 50px;
+      }
     }
   }
 `
