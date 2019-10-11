@@ -12,7 +12,7 @@ export const StyledCategory = styled.div`
     display: flex;
     align-items: baseline;
     margin-bottom: 20px;
-    margin-left: 40px;
+    margin-left: 5%;
     @media (max-width: 800px) {
       text-align: center;
       justify-content: center;
