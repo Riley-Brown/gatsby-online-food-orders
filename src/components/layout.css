@@ -47,3 +47,12 @@ button {
   appearance: none;
   cursor: pointer;
 }
+
+/* prevent ios zoom in on select list */
+@media screen and (max-width: 767px) {
+  select:active,
+  input:active,
+  textarea:active {
+    font-size: 16px;
+  }
+}
