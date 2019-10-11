@@ -31,8 +31,6 @@ export default function OrderCart() {
       }
     }
     mq.addListener(handleToggleCart)
-
-    handleToggleCart()
   }, [])
 
   const mq =
@@ -44,7 +42,6 @@ export default function OrderCart() {
     } else {
       dispatch(setShowCart(true))
     }
-    setLoaded(true)
   }
 
   // calculate total price every order change
