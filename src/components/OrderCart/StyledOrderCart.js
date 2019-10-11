@@ -3,7 +3,6 @@ import { row } from "../../styles/shared"
 
 export const StyledOrderCart = styled.div`
   width: ${props => (props.showCart ? "500px" : 0)};
-  visibility: ${props => (!props.loaded ? "hidden" : "visible")};
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -31,7 +30,7 @@ export const StyledOrderCart = styled.div`
     transform: translateY(-50%);
     background: #fff;
     border-radius: 10px;
-    transition: ${props => (props.loaded ? "200ms" : 0)};
+    transition: 200ms;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 1px 6px;
     transform: ${props =>
       props.showCart ? "translateY(-50%)" : "translateY(350px)"};
@@ -176,6 +175,9 @@ export const StyledOrderCart = styled.div`
     ${row("space-between", "center")};
     padding: 10px 20px;
     animation: 500ms fadeIn;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
     h3 {
       font-size: 2rem;
       margin: 0;
