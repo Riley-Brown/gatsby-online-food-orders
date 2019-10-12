@@ -126,7 +126,6 @@ export default function OrderCart() {
                 ))
                 .reverse()}
             </div>
-            <hr />
             <div className="total">
               <h3>Total</h3>
               <span>${totalPrice}</span>

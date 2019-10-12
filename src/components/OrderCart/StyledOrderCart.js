@@ -178,6 +178,8 @@ export const StyledOrderCart = styled.div`
     position: absolute;
     bottom: 0;
     width: 100%;
+    border-top: 1px solid #ccc;
+    height: 50px;
     h3 {
       font-size: 2rem;
       margin: 0;
