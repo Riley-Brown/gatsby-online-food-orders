@@ -50,9 +50,9 @@ button {
 
 /* prevent ios zoom in on select list */
 @media screen and (max-width: 767px) {
-  select:active,
-  input:active,
-  textarea:active {
+  select,
+  input,
+  textarea {
     font-size: 16px;
   }
 }
