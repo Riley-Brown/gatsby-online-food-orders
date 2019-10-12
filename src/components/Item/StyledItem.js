@@ -45,6 +45,7 @@ export const StyledItem = styled.div`
   }
   .quantity {
     margin-top: 0.2rem;
+    touch-action: manipulation;
     button {
       border-radius: 4px;
       border: none;
@@ -52,6 +53,7 @@ export const StyledItem = styled.div`
       color: #fff;
       padding: 2px 10px;
       cursor: pointer;
+      font-size: 1.6rem;
     }
     span {
       margin: 0 10px;
