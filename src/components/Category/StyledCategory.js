@@ -5,6 +5,9 @@ export const StyledCategory = styled.div`
   margin-top: 3rem;
   transition: 300ms;
   width: 100%;
+  @media (max-width: 800px) {
+    margin-top: 1rem;
+  }
   @media (max-width: 960px) {
     flex: 1 1 100%;
   }
@@ -17,6 +20,12 @@ export const StyledCategory = styled.div`
       text-align: center;
       justify-content: center;
       margin-left: 0px;
+      position: sticky;
+      z-index: 2;
+      background: #f9f9f9;
+      top: 0px;
+      padding: 20px 0;
+      margin-bottom: 1.45rem;
     }
     a,
     h1 {
