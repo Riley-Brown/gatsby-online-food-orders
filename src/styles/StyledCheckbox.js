@@ -3,7 +3,7 @@ import styled from "styled-components"
 export const StyledCheckbox = styled.label`
   position: relative;
   margin-bottom: 1.5rem;
-  display: block;
+  display: flex;
   width: 100%;
   padding: 10px;
   cursor: pointer;
@@ -29,7 +29,12 @@ export const StyledCheckbox = styled.label`
     font-weight: 500;
   }
   input {
-    margin-right: 1.7rem;
+    margin-right: 0.5rem;
+    position: relative;
+    top: 3px;
+    left: -9px;
+    width: 25px;
+    height: 25px;
     opacity: 0;
     &:checked ~ .check-mark {
       background: var(--secondary);
