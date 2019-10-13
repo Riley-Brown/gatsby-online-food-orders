@@ -12,14 +12,14 @@ exports.handler = async function(event, context, callback) {
 
   if (event.user_email) {
     await sgMail.send(msg)
-    return {
+    return callback(null, {
       statusCode: 200,
       body: "success",
-    }
+    })
   } else {
-    return {
+    return callback(null, {
       statusCode: 400,
       body: "something went wrong gg im switching to heroku",
-    }
+    })
   }
 }
