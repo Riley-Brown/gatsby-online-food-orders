@@ -22,7 +22,8 @@ export const StyledCategory = styled.div`
       margin-left: 0px;
       position: sticky;
       z-index: 2;
-      background: #f9f9f9;
+      background: rgba(249, 249, 249, 0.8);
+      backdrop-filter: blur(10px);
       top: 0px;
       padding: 20px 0;
       margin-bottom: 1.45rem;
