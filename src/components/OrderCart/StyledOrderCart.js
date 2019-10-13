@@ -20,6 +20,7 @@ export const StyledOrderCart = styled.div`
     left: 0;
     right: 0;
     z-index: ${props => (props.showCart ? 22 : 0)};
+    /* overflow-y: auto; */
   }
   .cart-wrapper {
     position: fixed;
@@ -83,6 +84,7 @@ export const StyledOrderCart = styled.div`
     animation: 500ms fadeIn;
     overflow-y: auto;
     max-height: 300px;
+    -webkit-overflow-scrolling: touch;
     &::-webkit-scrollbar-track {
       -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
       box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
