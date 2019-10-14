@@ -90,7 +90,7 @@ export default function OrderCart() {
 
     try {
       const test = await axios.post(
-        "./netlify/functions/confirmOrder",
+        "/.netlify/functions/confirmOrder",
         JSON.stringify(data)
       )
       console.log(test)
