@@ -1,4 +1,5 @@
 const dotenv = require("dotenv")
+var proxy = require("http-proxy-middleware")
 
 if (process.env.NODE_ENV !== "production") {
   dotenv.config()
@@ -46,4 +47,15 @@ module.exports = {
     // To learn more, visit: https://gatsby.dev/offline
     `gatsby-plugin-offline`,
   ],
+  developMiddleware: app => {
+    app.use(
+      "/.netlify/functions/",
+      proxy({
+        target: "http://localhost:9000",
+        pathRewrite: {
+          "/.netlify/functions/": "",
+        },
+      })
+    )
+  },
 }
