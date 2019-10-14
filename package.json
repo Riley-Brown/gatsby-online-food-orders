@@ -27,9 +27,11 @@
     "redux": "^4.0.4",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+    "run-all": "^1.0.1",
     "styled-components": "^4.3.2"
   },
   "devDependencies": {
+    "http-proxy-middleware": "^0.20.0",
     "prettier": "^1.18.2"
   },
   "keywords": [
@@ -37,11 +39,15 @@
   ],
   "license": "MIT",
   "scripts": {
-    "build": "gatsby build",
+    "build": "gatsby build && netlify-lambda serve src/lambda",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
-    "start": "npm run develop",
+    "start": "run-p start:**",
     "serve": "gatsby serve",
+    "start:app": "npm run develop",
+    "start:lambda": "netlify-lambda serve src/lambda",
+    "build:app": "gatsby build",
+    "build:lambda": "netlify-lambda build src/lambda",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing \"",
     "lambda-serve": "netlify-lambda serve functions",
     "lambda-build": "netlify-lambda build functions"
