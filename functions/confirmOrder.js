@@ -1,17 +1,28 @@
 const sgMail = require("@sendgrid/mail")
+// const apiKey = process.env.SEND_GRID_API_KEY
 
-exports.handler = async function(event, context, callback) {
-  sgMail.setApiKey(process.env.SEND_GRID_API_KEY)
+exports.handler = function(event, context, callback) {
+  const { SEND_GRID_API_KEY } = process.env
+  sgMail.setApiKey(SEND_GRID_API_KEY)
+  const data = JSON.parse(event.body)
+  // console.log(data)
+
+  console.log(process.env.NODE_ENV)
 
   const msg = {
-    to: event.user_email,
+    to: data.user_email,
     from: "orders-testing@riley.gg",
     subject: "New online order placed",
-    html: event.html,
+    html: data.html,
   }
 
-  if (event.user_email) {
-    await sgMail.send(msg)
+  // callback(null, {
+  //   statusCode: 200,
+  //   body: JSON.stringify({ success: true }),
+  // })
+
+  if (data.user_email) {
+    // sgMail.send(msg)
     return callback(null, {
       statusCode: 200,
       body: "success",
