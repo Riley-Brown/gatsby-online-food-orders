@@ -3,6 +3,7 @@ import {
   SET_ORDER,
   ADD_TO_ORDER,
   REMOVE_FROM_ORDER,
+  SHOW_CONFIRM_ORDER,
 } from "./actions"
 
 const initialState = {
@@ -23,6 +24,8 @@ export default (state = initialState, action) => {
     case REMOVE_FROM_ORDER:
       const filteredOrders = state.order.filter((_, index) => index !== payload)
       return { ...state, order: filteredOrders }
+    case SHOW_CONFIRM_ORDER:
+      return { ...state, showConfirmOrder: payload }
     default:
       return state
   }
