@@ -9,7 +9,12 @@ import shoppingBagSvg from "assets/svg/cart.svg"
 
 import { useSelector, useDispatch } from "react-redux"
 
-import { setOrder, setShowCart, removeFromOrder } from "state/actions"
+import {
+  setOrder,
+  setShowCart,
+  removeFromOrder,
+  showConfirmOrder,
+} from "state/actions"
 
 import ReactDOMServer from "react-dom/server"
 
@@ -129,11 +134,13 @@ export default function OrderCart() {
                       </h1>
                       <div className="item-price">
                         <span>${item.price}</span>
-                        <img
-                          onClick={() => dispatch(removeFromOrder(index))}
-                          src={deleteIcon}
-                          alt="Delete Item"
-                        />
+                        <button>
+                          <img
+                            onClick={() => dispatch(removeFromOrder(index))}
+                            src={deleteIcon}
+                            alt="Delete Item"
+                          />
+                        </button>
                       </div>
                     </div>
                     {/* Add Ons */}
@@ -170,7 +177,7 @@ export default function OrderCart() {
                 <h3 onClick={() => send()}>Total:</h3>
                 <span>${totalPrice}</span>
               </div>
-              <button>
+              <button onClick={() => dispatch(showConfirmOrder(true))}>
                 <span>Checkout</span>
                 <img src={shoppingBagSvg} alt="" />
               </button>
