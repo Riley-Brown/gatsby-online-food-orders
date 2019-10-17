@@ -182,13 +182,36 @@ export const StyledOrderCart = styled.div`
     width: 100%;
     border-top: 1px solid #ccc;
     height: 50px;
+    div {
+      display: flex;
+    }
     h3 {
       font-size: 2rem;
       margin: 0;
+      margin-right: 10px;
+      font-weight: 700;
     }
     span {
       font-size: 2rem;
       font-weight: 700;
+    }
+    button {
+      background: var(--secondary);
+      color: #fff;
+      padding: 8px 10px;
+      position: relative;
+      span {
+        font-weight: 500;
+        font-size: 1.6rem;
+        margin-right: 30px;
+      }
+      img {
+        height: 25px;
+        top: 50%;
+        transform: translateY(-50%);
+        right: 10px;
+        position: absolute;
+      }
     }
   }
 `
