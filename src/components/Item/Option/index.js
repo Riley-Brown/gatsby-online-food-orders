@@ -70,6 +70,7 @@ export default function Option({
             value="none"
             name={`${itemId}-${option.optionName}`}
             data-price="0"
+            disabled={!showOptions}
           />
           <span className="check-mark" />
           <span>None</span>

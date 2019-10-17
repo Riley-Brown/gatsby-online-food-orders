@@ -70,6 +70,7 @@ export default function AddOns({ item, setAddOnsPrice, handleUpdateAddOns }) {
                 id={`${item.itemName}-${addOn.addOnName}`}
                 value={addOn.addOnName}
                 onChange={handleAddOns}
+                disabled={!showAddOns}
               />
               <span className="check-mark" />
               <span>{addOn.addOnName}</span>
