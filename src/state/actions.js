@@ -29,3 +29,11 @@ export const removeFromOrder = payload => dispatch => {
     payload,
   })
 }
+
+export const SHOW_CONFIRM_ORDER = "SHOW_CONFIRM_ORDER"
+export const showConfirmOrder = payload => dispatch => {
+  dispatch({
+    type: SHOW_CONFIRM_ORDER,
+    payload,
+  })
+}

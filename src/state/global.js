@@ -8,6 +8,7 @@ import {
 const initialState = {
   show: false,
   order: [],
+  showConfirmOrder: false,
 }
 
 export default (state = initialState, action) => {
