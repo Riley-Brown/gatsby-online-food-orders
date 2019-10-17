@@ -5,6 +5,7 @@ import deleteIcon from "assets/svg/delete.svg"
 import chevronUp from "assets/svg/chevron-up.svg"
 import chevronDown from "assets/svg/chevron-down.svg"
 import emptyCartSvg from "assets/svg/empty-cart.svg"
+import shoppingBagSvg from "assets/svg/cart.svg"
 
 import { useSelector, useDispatch } from "react-redux"
 
@@ -102,12 +103,11 @@ export default function OrderCart() {
   return (
     <StyledOrderCart ref={cartRef} showCart={show} loaded={loaded}>
       <div className="cart-wrapper">
-        <div
-          className="order-header"
-          onClick={() => dispatch(setShowCart(!show))}
-        >
-          <h2 className="order-title">Your Order</h2>
-          <img src={show ? chevronDown : chevronUp} alt="toggle cart" />
+        <div className="order-header">
+          <button onClick={() => dispatch(setShowCart(!show))}>
+            <h2 className="order-title">Your Order</h2>
+            <img src={show ? chevronDown : chevronUp} alt="toggle cart" />
+          </button>
         </div>
         {cartEmpty ? (
           <div className="empty-cart">
@@ -166,8 +166,14 @@ export default function OrderCart() {
                 .reverse()}
             </div>
             <div className="total">
-              <h3 onClick={() => send()}>Total</h3>
-              <span>${totalPrice}</span>
+              <div>
+                <h3 onClick={() => send()}>Total:</h3>
+                <span>${totalPrice}</span>
+              </div>
+              <button>
+                <span>Checkout</span>
+                <img src={shoppingBagSvg} alt="" />
+              </button>
             </div>
           </>
         )}
