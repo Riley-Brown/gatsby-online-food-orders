@@ -78,6 +78,7 @@ export default function Item({ item }) {
         addOns,
         quantity,
         options,
+        itemImgFluid: item.itemImage.fluid,
       })
     )
     setAddSuccess(true)
