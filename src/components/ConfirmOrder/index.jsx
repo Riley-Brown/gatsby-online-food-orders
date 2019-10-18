@@ -2,7 +2,9 @@ import React, { useEffect, useState, useRef } from "react"
 import { StyledConfirmOrder } from "./StyledConfirmOrder"
 import { useDispatch, useSelector } from "react-redux"
 import { removeFromOrder, showConfirmOrder } from "state/actions"
-import deleteIcon from "assets/svg/delete.svg"
+
+import ReviewOrder from "./ReviewOrder"
+import CustomerInfo from "./CustomerInfo"
 
 export default function ConfirmOrder() {
   const dispatch = useDispatch()
@@ -10,82 +12,37 @@ export default function ConfirmOrder() {
   const order = useSelector(state => state.global.order)
 
   const [totalPrice, setTotalPrice] = useState(null)
+  const [index, setIndex] = useState(0)
 
-  const reviewOrderRef = useRef(null)
+  const modalRef = useRef(null)
 
   useEffect(() => {
-    if (reviewOrderRef.current) {
+    if (modalRef.current) {
       document.addEventListener("mousedown", handleOutsideClick, false)
     }
-
-    console.log(show)
-
     return () => document.removeEventListener("mousedown", handleOutsideClick)
   }, [show])
 
   const handleOutsideClick = e => {
-    if (reviewOrderRef && reviewOrderRef.current.contains(e.target)) {
+    if (modalRef && modalRef.current.contains(e.target)) {
       return
     }
     dispatch(showConfirmOrder(false))
   }
 
+  const next = () => setIndex(index => ++index)
+  const previous = () => setIndex(index => index--)
+  const close = () => dispatch(showConfirmOrder(false))
+
+  const multiStepArr = [
+    <ReviewOrder close={close} next={next} />,
+    <CustomerInfo previous={previous} />,
+  ]
+
   return (
     <StyledConfirmOrder>
-      <div className="review-order" ref={reviewOrderRef}>
-        <div className="header">
-          <h4>Review Order</h4>
-        </div>
-        <div className="body">
-          <div className="items">
-            {order
-              .map((item, index) => (
-                <div className="item" key={index}>
-                  <div className="item-name">
-                    <h1>
-                      {item.quantity} {item.size} {item.name}
-                    </h1>
-                    <div className="item-price">
-                      <span>${item.price}</span>
-                      <button>
-                        <img
-                          onClick={() => dispatch(removeFromOrder(index))}
-                          src={deleteIcon}
-                          alt="Delete Item"
-                        />
-                      </button>
-                    </div>
-                  </div>
-                  {/* Add Ons */}
-                  {item.addOns.length > 0 && (
-                    <div className="add-ons">
-                      <ul>
-                        <h4>Add Ons</h4>
-                        {item.addOns.map(addOn => (
-                          <li>{addOn}</li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                  {/* Options */}
-                  {item.options.length > 0 && (
-                    <div className="add-ons">
-                      <ul>
-                        <h4>Options</h4>
-                        {item.options.map(option => (
-                          <li>
-                            {option.optionName}:{" "}
-                            <span>{option.choiceName}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-                </div>
-              ))
-              .reverse()}
-          </div>
-        </div>
+      <div ref={modalRef} id="confirm-order-modal">
+        {multiStepArr[index]}
       </div>
     </StyledConfirmOrder>
   )
