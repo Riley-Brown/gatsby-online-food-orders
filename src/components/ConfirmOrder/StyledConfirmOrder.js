@@ -1,5 +1,7 @@
 import styled from "styled-components"
 
+const paddingContainer = "25px"
+
 export const StyledConfirmOrder = styled.div`
   position: fixed;
   top: 0;
@@ -11,18 +13,10 @@ export const StyledConfirmOrder = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  .review-order {
-    background: #fff;
+  #confirm-order-modal {
     max-width: 600px;
     max-height: 600px;
     width: 100%;
-    padding: 25px;
     height: 100%;
-    .header {
-      h4 {
-        text-align: center;
-        font-size: 2.5rem;
-      }
-    }
   }
 `
