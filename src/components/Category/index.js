@@ -25,7 +25,7 @@ export default function Category({ data, navigate }) {
         </div>
       </StyledCategory>
       <OrderCart />
-      {showConfirmOrder && <ConfirmOrder />}
+      <ConfirmOrder />
     </Layout>
   )
 }

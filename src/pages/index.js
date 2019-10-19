@@ -16,7 +16,7 @@ const IndexPage = () => {
     <Layout>
       <Categories />
       <OrderCart />
-      {showConfirmOrder && <ConfirmOrder />}
+      <ConfirmOrder />
     </Layout>
   )
 }
