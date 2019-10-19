@@ -10,13 +10,13 @@ export const StyledConfirmOrder = styled.div`
   right: 0;
   background: rgba(0, 0, 0, 0.7);
   z-index: 22;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  overflow-y: auto;
   #confirm-order-modal {
+    position: absolute;
+    margin: 5% 0;
+    left: 50%;
+    transform: translateX(-50%);
     max-width: 600px;
-    max-height: 600px;
-    width: 100%;
-    height: 100%;
+    width: 80%;
   }
 `
