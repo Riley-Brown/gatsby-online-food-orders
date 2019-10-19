@@ -14,6 +14,7 @@ import {
   setShowCart,
   removeFromOrder,
   showConfirmOrder,
+  setGlobalTotalPrice,
 } from "state/actions"
 
 import ReactDOMServer from "react-dom/server"
@@ -177,7 +178,12 @@ export default function OrderCart() {
                 <h3 onClick={() => send()}>Total:</h3>
                 <span>${totalPrice}</span>
               </div>
-              <button onClick={() => dispatch(showConfirmOrder(true))}>
+              <button
+                onClick={() => {
+                  dispatch(showConfirmOrder(true))
+                  dispatch(setGlobalTotalPrice(totalPrice))
+                }}
+              >
                 <span>Checkout</span>
                 <img src={shoppingBagSvg} alt="" />
               </button>
