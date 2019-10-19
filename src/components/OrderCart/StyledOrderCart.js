@@ -152,6 +152,7 @@ export const StyledOrderCart = styled.div`
       }
       .item-price {
         display: flex;
+        align-items: flex-start;
         img {
           cursor: pointer;
         }
