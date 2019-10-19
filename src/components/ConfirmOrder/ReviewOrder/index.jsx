@@ -1,8 +1,5 @@
 import React from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { removeFromOrder } from "state/actions"
-
-import deleteIcon from "assets/svg/delete.svg"
 
 import Img from "gatsby-image"
 
@@ -55,13 +52,6 @@ export default function ReviewOrder({ close, next }) {
                   )}
                   <div className="item-price">
                     <span>Item Price: ${item.price}</span>
-                    <button>
-                      <img
-                        onClick={() => dispatch(removeFromOrder(index))}
-                        src={deleteIcon}
-                        alt="Delete Item"
-                      />
-                    </button>
                   </div>
                 </div>
                 <Img fluid={item.itemImgFluid} />
