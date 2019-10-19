@@ -82,9 +82,26 @@ export const StyledReviewOrder = styled.div`
     text-align: center;
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .total {
+      h3 {
+        font-size: 2rem;
+        span {
+          margin-left: 5px;
+          font-size: 2rem;
+        }
+      }
+    }
     button {
-      padding: 10px;
+      padding: 10px 45px;
       font-size: 2rem;
+      margin: 0 10px;
+      &:last-of-type {
+        background: var(--secondary);
+        color: #fff;
+      }
     }
   }
 `
