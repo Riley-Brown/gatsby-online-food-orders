@@ -4,10 +4,12 @@ import { StyledCategory } from "./StyledCategory"
 import Item from "../Item"
 import Layout from "../layout"
 import OrderCart from "../OrderCart"
+import ConfirmOrder from "components/ConfirmOrder"
 import { useSelector } from "react-redux"
 
 export default function Category({ data, navigate }) {
   const showCart = useSelector(state => state.global.show)
+  const showConfirmOrder = useSelector(state => state.global.showConfirmOrder)
 
   return (
     <Layout>
@@ -23,6 +25,7 @@ export default function Category({ data, navigate }) {
         </div>
       </StyledCategory>
       <OrderCart />
+      {showConfirmOrder && <ConfirmOrder />}
     </Layout>
   )
 }
