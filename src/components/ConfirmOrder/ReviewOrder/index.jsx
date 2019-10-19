@@ -9,6 +9,8 @@ export default function ReviewOrder({ close, next }) {
   const order = useSelector(state => state.global.order)
   const dispatch = useDispatch()
 
+  const totalPrice = useSelector(state => state.global.totalPrice)
+
   return (
     <StyledReviewOrder>
       <div className="header">
@@ -61,8 +63,16 @@ export default function ReviewOrder({ close, next }) {
         </div>
       </div>
       <div className="footer">
-        <button onClick={close}>Cancel</button>
-        <button onClick={next}>Next</button>
+        <div className="total">
+          <h3>
+            Order Total:
+            <span>${totalPrice}</span>
+          </h3>
+        </div>
+        <div>
+          <button onClick={close}>Cancel</button>
+          <button onClick={next}>Next</button>
+        </div>
       </div>
     </StyledReviewOrder>
   )
