@@ -23,6 +23,11 @@ export default function ConfirmOrder() {
     return () => document.removeEventListener("mousedown", handleOutsideClick)
   }, [show])
 
+  useEffect(() => {
+    document.querySelector("body").classList.add("modal-open")
+    return () => document.querySelector("body").classList.remove("modal-open")
+  }, [])
+
   const handleOutsideClick = e => {
     if (modalRef && modalRef.current.contains(e.target)) {
       return
@@ -31,7 +36,7 @@ export default function ConfirmOrder() {
   }
 
   const next = () => setIndex(index => ++index)
-  const previous = () => setIndex(index => index--)
+  const previous = () => setIndex(index => --index)
   const close = () => dispatch(showConfirmOrder(false))
 
   const multiStepArr = [
