@@ -37,3 +37,11 @@ export const showConfirmOrder = payload => dispatch => {
     payload,
   })
 }
+
+export const SET_GLOBAL_TOTAL_PRICE = "SET_GLOBAL_TOTAL_PRICE"
+export const setGlobalTotalPrice = payload => dispatch => {
+  dispatch({
+    type: SET_GLOBAL_TOTAL_PRICE,
+    payload,
+  })
+}

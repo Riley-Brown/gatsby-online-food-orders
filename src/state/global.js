@@ -4,12 +4,14 @@ import {
   ADD_TO_ORDER,
   REMOVE_FROM_ORDER,
   SHOW_CONFIRM_ORDER,
+  SET_GLOBAL_TOTAL_PRICE,
 } from "./actions"
 
 const initialState = {
   show: false,
   order: [],
   showConfirmOrder: false,
+  totalPrice: null,
 }
 
 export default (state = initialState, action) => {
@@ -26,6 +28,8 @@ export default (state = initialState, action) => {
       return { ...state, order: filteredOrders }
     case SHOW_CONFIRM_ORDER:
       return { ...state, showConfirmOrder: payload }
+    case SET_GLOBAL_TOTAL_PRICE:
+      return { ...state, totalPrice: payload }
     default:
       return state
   }
