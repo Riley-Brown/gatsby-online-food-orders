@@ -17,10 +17,6 @@ import {
   setGlobalTotalPrice,
 } from "state/actions"
 
-import ReactDOMServer from "react-dom/server"
-
-import axios from "axios"
-
 export default function OrderCart() {
   const [totalPrice, setTotalPrice] = useState(null)
   const [cartEmpty, setCartEmpty] = useState(false)
@@ -70,41 +66,6 @@ export default function OrderCart() {
     // update local storage every order change
     localStorage.setItem("order", JSON.stringify(order))
   }, [order])
-
-  const toHtml = async element => {
-    const orderHTML = order.map(item => (
-      <div>
-        <h4> {item.name}</h4>
-        <p>{item.size}</p>
-        <p>{item.price}</p>
-        <p>Quantity: {item.quantity}</p>
-        AddOns: lmao
-        <a href="https://google.com?confirm=true">
-          <button>Confirm Order</button>
-        </a>
-      </div>
-    ))
-
-    return ReactDOMServer.renderToString(orderHTML)
-  }
-
-  const send = async () => {
-    const html = await toHtml()
-    const data = {
-      user_email: "riley@riley.gg",
-      html,
-    }
-
-    try {
-      const test = await axios.post(
-        "/.netlify/functions/confirmOrder",
-        JSON.stringify(data)
-      )
-      console.log(test)
-    } catch (err) {
-      console.log(err)
-    }
-  }
 
   return (
     <StyledOrderCart ref={cartRef} showCart={show} loaded={loaded}>
@@ -175,7 +136,7 @@ export default function OrderCart() {
             </div>
             <div className="total">
               <div>
-                <h3 onClick={() => send()}>Total:</h3>
+                <h3>Total:</h3>
                 <span>${totalPrice}</span>
               </div>
               <button
