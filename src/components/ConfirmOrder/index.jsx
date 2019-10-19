@@ -41,7 +41,7 @@ export default function ConfirmOrder() {
 
   const multiStepArr = [
     <ReviewOrder close={close} next={next} />,
-    <CustomerInfo previous={previous} />,
+    <CustomerInfo previous={previous} close={close} />,
   ]
 
   return (
