@@ -6,30 +6,28 @@ import { removeFromOrder, showConfirmOrder } from "state/actions"
 import ReviewOrder from "./ReviewOrder"
 import CustomerInfo from "./CustomerInfo"
 
+import { CSSTransition } from "react-transition-group"
+
 export default function ConfirmOrder() {
   const dispatch = useDispatch()
   const show = useSelector(state => state.global.showConfirmOrder)
-  const order = useSelector(state => state.global.order)
-
-  const [totalPrice, setTotalPrice] = useState(null)
   const [index, setIndex] = useState(0)
-
   const modalRef = useRef(null)
 
   useEffect(() => {
     if (modalRef.current) {
       document.addEventListener("mousedown", handleOutsideClick, false)
     }
+    if (show) {
+      document.querySelector("body").classList.add("modal-open")
+    } else {
+      document.querySelector("body").classList.remove("modal-open")
+    }
     return () => document.removeEventListener("mousedown", handleOutsideClick)
   }, [show])
 
-  useEffect(() => {
-    document.querySelector("body").classList.add("modal-open")
-    return () => document.querySelector("body").classList.remove("modal-open")
-  }, [])
-
   const handleOutsideClick = e => {
-    if (modalRef && modalRef.current.contains(e.target)) {
+    if (modalRef.current && modalRef.current.contains(e.target)) {
       return
     }
     dispatch(showConfirmOrder(false))
@@ -45,10 +43,17 @@ export default function ConfirmOrder() {
   ]
 
   return (
-    <StyledConfirmOrder>
-      <div ref={modalRef} id="confirm-order-modal">
-        {multiStepArr[index]}
-      </div>
-    </StyledConfirmOrder>
+    <CSSTransition
+      unmountOnExit
+      in={show}
+      timeout={300}
+      classNames="confirm-order-modal"
+    >
+      <StyledConfirmOrder>
+        <div ref={modalRef} id="confirm-order-modal">
+          {multiStepArr[index]}
+        </div>
+      </StyledConfirmOrder>
+    </CSSTransition>
   )
 }

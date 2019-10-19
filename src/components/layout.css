@@ -76,3 +76,21 @@ button {
 .modal-open {
   overflow: hidden;
 }
+
+.confirm-order-modal-enter {
+  opacity: 0;
+}
+
+.confirm-order-modal-enter-active {
+  opacity: 1;
+  transition: opacity 300ms;
+}
+
+.confirm-order-modal-exit {
+  opacity: 1;
+}
+
+.confirm-order-modal-exit-active {
+  opacity: 0;
+  transition: opacity 300ms;
+}
