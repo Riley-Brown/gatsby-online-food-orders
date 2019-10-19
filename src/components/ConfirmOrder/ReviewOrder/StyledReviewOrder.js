@@ -19,7 +19,6 @@ export const StyledReviewOrder = styled.div`
     .items {
       overflow-y: auto;
       max-height: 450px;
-
       .item {
         display: flex;
         justify-content: space-between;
