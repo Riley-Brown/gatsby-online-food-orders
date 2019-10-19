@@ -9,6 +9,8 @@ export const StyledCustomerInfo = styled.div`
     text-align: center;
     color: #fff;
     padding: ${paddingContainer};
+    border-top-right-radius: 8px;
+    border-top-left-radius: 8px;
     h4 {
       font-size: 2.5rem;
     }
@@ -16,11 +18,11 @@ export const StyledCustomerInfo = styled.div`
   .body {
     background: #fff;
     form {
-      padding: ${paddingContainer};
       div {
         display: flex;
+        padding: 1rem 25px;
         flex-direction: column;
-        margin: 1rem 0;
+        margin-bottom: 1rem;
         label {
           margin: 1rem 0;
         }
@@ -41,15 +43,11 @@ export const StyledCustomerInfo = styled.div`
     }
   }
   .footer {
-    background: #fff;
     padding: ${paddingContainer};
     border-top: 1px solid #ccc;
     text-align: center;
     border-bottom-right-radius: 8px;
     border-bottom-left-radius: 8px;
-    /* display: flex;
-    justify-content: space-between; */
-    align-items: center;
     button {
       padding: 10px 45px;
       font-size: 2rem;
