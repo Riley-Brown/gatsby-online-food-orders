@@ -19,12 +19,16 @@ export const StyledReviewOrder = styled.div`
     .items {
       overflow-y: auto;
       max-height: 450px;
-      padding: ${paddingContainer};
+
       .item {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 30px;
+        padding: ${paddingContainer};
+        &:nth-child(even) {
+          background: #e6e6e6;
+        }
         .item-info {
           flex: 0 0 50%;
           .item-name {
@@ -38,8 +42,34 @@ export const StyledReviewOrder = styled.div`
           border-radius: 20px;
         }
         .item-price {
+          margin: 1rem 0;
+          font-weight: 500;
           span {
-            font-size: 2rem;
+            margin: 1rem 0;
+          }
+          img {
+            width: 20px;
+            height: 20px;
+          }
+        }
+        .add-ons {
+          margin: 0.5rem 0;
+          ul {
+            margin: 0;
+            list-style: none;
+            h4 {
+              font-weight: 500;
+            }
+            li {
+              &::before {
+                content: "-";
+                margin: 0 5px;
+              }
+            }
+          }
+          h4 {
+            font-size: 1.6rem;
+            font-weight: normal;
           }
         }
       }
