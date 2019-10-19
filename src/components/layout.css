@@ -72,3 +72,7 @@ button {
     transform: translateY(0px);
   }
 }
+
+.modal-open {
+  overflow: hidden;
+}
