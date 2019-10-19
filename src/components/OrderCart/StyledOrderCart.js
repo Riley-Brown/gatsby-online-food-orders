@@ -1,8 +1,8 @@
 import styled from "styled-components"
-import { row } from "../../styles/shared"
+import { row } from "styles/shared"
 
 export const StyledOrderCart = styled.div`
-  width: ${props => (props.showCart ? "500px" : 0)};
+  width: ${props => (props.showCart ? "25%" : 0)};
   @keyframes fadeIn {
     from {
       opacity: 0;
@@ -20,11 +20,10 @@ export const StyledOrderCart = styled.div`
     left: 0;
     right: 0;
     z-index: ${props => (props.showCart ? 22 : 0)};
-    /* overflow-y: auto; */
   }
   .cart-wrapper {
     position: fixed;
-    right: 50px;
+    right: 3%;
     width: 380px;
     height: 400px;
     top: 50%;
@@ -47,7 +46,6 @@ export const StyledOrderCart = styled.div`
       width: 95%;
     }
   }
-
   .empty-cart {
     animation: 500ms fadeIn;
     div {
@@ -102,7 +100,6 @@ export const StyledOrderCart = styled.div`
   }
   .order-header {
     background: var(--secondary);
-    padding: 10px;
     text-align: center;
     color: #fff;
     top: 0;
@@ -111,6 +108,8 @@ export const StyledOrderCart = styled.div`
     position: relative;
     button {
       width: 100%;
+      height: 100%;
+      padding: 10px;
       img {
         position: absolute;
         right: 10px;
@@ -122,7 +121,6 @@ export const StyledOrderCart = styled.div`
         color: #fff;
       }
     }
-
     .toggle {
       position: absolute;
       right: 20px;
