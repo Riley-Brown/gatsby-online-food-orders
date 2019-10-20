@@ -38,6 +38,7 @@ export const StyledConfirmOrder = styled.div`
       border-top-right-radius: 8px;
       text-align: center;
       position: relative;
+      height: 75px;
       @media (max-width: 500px) {
         border-top-left-radius: 0px;
         border-top-right-radius: 0px;
@@ -45,6 +46,11 @@ export const StyledConfirmOrder = styled.div`
         top: 0;
         right: 0;
         left: 0;
+        height: 60px;
+      }
+      h2 {
+        font-size: 2.2rem;
+        color: #fff;
       }
       button {
         width: 100%;
@@ -53,10 +59,6 @@ export const StyledConfirmOrder = styled.div`
         @media (max-width: 500px) {
           padding: ${paddingContainerMobile};
           height: 60px;
-        }
-        h2 {
-          font-size: 2.2rem;
-          color: #fff;
         }
         img {
           position: absolute;
@@ -87,7 +89,7 @@ export const StyledConfirmOrder = styled.div`
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: absolute;
+      position: sticky;
       bottom: 0;
       left: 0;
       right: 0;
