@@ -20,20 +20,39 @@ export const StyledConfirmOrder = styled.div`
     max-width: 600px;
     width: 90%;
     overflow: hidden;
-    height: 90vh;
     max-height: 600px;
+    @media (max-width: 500px) {
+      max-height: initial;
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 100vh;
+      width: 100%;
+      transform: none;
+    }
     .header {
       background: var(--secondary);
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
       text-align: center;
       position: relative;
+      @media (max-width: 500px) {
+        border-top-left-radius: 0px;
+        border-top-right-radius: 0px;
+        position: sticky;
+        top: 0;
+        right: 0;
+        left: 0;
+      }
       button {
         width: 100%;
         height: 75px;
         padding: ${paddingContainer};
         @media (max-width: 500px) {
           padding: ${paddingContainerMobile};
+          height: 60px;
         }
         h2 {
           font-size: 2.2rem;
@@ -50,7 +69,12 @@ export const StyledConfirmOrder = styled.div`
     .body {
       background: #fff;
       max-height: 450px;
+      height: calc(100vh - 150px);
       overflow-y: auto;
+      -webkit-overflow-scrolling: touch;
+      @media (max-width: 500px) {
+        max-height: initial;
+      }
     }
     .footer {
       background: #fff;
@@ -67,9 +91,25 @@ export const StyledConfirmOrder = styled.div`
       bottom: 0;
       left: 0;
       right: 0;
+      button {
+        padding: 10px 45px;
+        font-size: 2rem;
+        margin: 0 10px;
+        @media (max-width: 500px) {
+          padding: 10px 20px;
+        }
+        &:last-of-type {
+          background: var(--secondary);
+          color: #fff;
+        }
+      }
       @media (max-width: 500px) {
         padding: ${paddingContainerMobile};
         flex-direction: column;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+        position: fixed;
+        height: auto;
       }
     }
   }
