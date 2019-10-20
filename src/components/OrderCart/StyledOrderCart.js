@@ -2,7 +2,7 @@ import styled from "styled-components"
 import { row } from "styles/shared"
 
 export const StyledOrderCart = styled.div`
-  width: ${props => (props.showCart ? "25%" : 0)};
+  width: ${props => (props.showCart ? "calc(1450px - 75%)" : 0)};
   @keyframes fadeIn {
     from {
       opacity: 0;
