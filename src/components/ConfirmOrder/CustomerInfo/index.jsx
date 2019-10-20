@@ -85,10 +85,10 @@ export default function CustomerInfo({ previous, confirmOrder, close }) {
   return (
     <StyledCustomerInfo>
       <div className="header">
-        <h4>Contact Info</h4>
+        <h2>Contact Info</h2>
       </div>
-      <div className="body">
-        <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit}>
+        <main className="body">
           <div>
             <label htmlFor="name">Name</label>
             <input
@@ -129,14 +129,14 @@ export default function CustomerInfo({ previous, confirmOrder, close }) {
               onChange={onChange}
             />
           </div>
-          <footer className="footer">
-            <button type="button" onClick={previous}>
-              Back
-            </button>
-            <button type="submit">Place Order</button>
-          </footer>
-        </form>
-      </div>
+        </main>
+        <footer className="footer">
+          <button type="button" onClick={previous}>
+            Back
+          </button>
+          <button type="submit">Place Order</button>
+        </footer>
+      </form>
     </StyledCustomerInfo>
   )
 }
