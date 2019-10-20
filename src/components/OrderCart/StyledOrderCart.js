@@ -33,13 +33,13 @@ export const StyledOrderCart = styled.div`
     transition: 200ms;
     box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 1px 6px;
     transform: ${props =>
-      props.showCart ? "translateY(-50%)" : "translateY(350px)"};
+      props.showCart ? "translateY(-50%)" : "translateY(354px)"};
     bottom: ${props => (props.showCart ? "initial" : 0)};
     top: ${props => (props.showCart ? "50%" : "initial")};
     @media (max-width: 960px) {
       left: 50%;
       transform: ${props =>
-        props.showCart ? "translate(-50%, -50%)" : "translate(-50%, 350px)"};
+        props.showCart ? "translate(-50%, -50%)" : "translate(-50%, 354px)"};
       width: 450px;
     }
     @media (max-width: 500px) {
@@ -192,11 +192,18 @@ export const StyledOrderCart = styled.div`
       font-size: 2rem;
       margin: 0;
       margin-right: 10px;
-      font-weight: 700;
+      font-weight: 500;
+      @media (max-width: 500px) {
+        font-size: 1.7rem;
+        margin-right: 5px;
+      }
     }
     span {
       font-size: 2rem;
-      font-weight: 700;
+      font-weight: 500;
+      @media (max-width: 500px) {
+        font-size: 1.7rem;
+      }
     }
     button {
       background: var(--secondary);
