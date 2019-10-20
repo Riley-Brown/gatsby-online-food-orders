@@ -1,7 +1,5 @@
 import styled from "styled-components"
 
-const paddingContainer = "25px"
-
 export const StyledCustomerInfo = styled.div`
   .header {
     h4 {
@@ -36,14 +34,7 @@ export const StyledCustomerInfo = styled.div`
   }
   .footer {
     button {
-      padding: 10px 45px;
-      font-size: 2rem;
-      margin: 0 10px;
       width: 200px;
-      &:last-of-type {
-        background: var(--secondary);
-        color: #fff;
-      }
     }
   }
 `

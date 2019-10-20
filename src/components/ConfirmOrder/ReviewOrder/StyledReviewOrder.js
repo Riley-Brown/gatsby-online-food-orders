@@ -1,30 +1,27 @@
 import styled from "styled-components"
 
 const paddingContainer = "25px"
+const paddingContainerMobile = "13px"
 
 export const StyledReviewOrder = styled.div`
   .header {
     background: var(--secondary);
-    padding: ${paddingContainer};
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
-    h4 {
-      text-align: center;
-      font-size: 2.5rem;
-      color: #fff;
-    }
+    text-align: center;
+    position: relative;
   }
   .body {
-    background: #fff;
     .items {
-      overflow-y: auto;
-      max-height: 450px;
       .item {
         display: flex;
         justify-content: space-between;
         align-items: center;
         margin-bottom: 30px;
         padding: ${paddingContainer};
+        @media (max-width: 500px) {
+          padding: ${paddingContainerMobile};
+        }
         &:nth-child(even) {
           background: #e6e6e6;
         }
@@ -75,15 +72,6 @@ export const StyledReviewOrder = styled.div`
     }
   }
   .footer {
-    background: #fff;
-    padding: ${paddingContainer};
-    border-top: 1px solid #ccc;
-    text-align: center;
-    border-bottom-right-radius: 8px;
-    border-bottom-left-radius: 8px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
     .total {
       h3 {
         font-size: 2rem;
@@ -93,13 +81,10 @@ export const StyledReviewOrder = styled.div`
         }
       }
     }
-    button {
-      padding: 10px 45px;
-      font-size: 2rem;
-      margin: 0 10px;
-      &:last-of-type {
-        background: var(--secondary);
-        color: #fff;
+    div:last-of-type {
+      display: flex;
+      @media (max-width: 500px) {
+        margin-top: 1rem;
       }
     }
   }
