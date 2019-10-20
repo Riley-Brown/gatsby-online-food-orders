@@ -4,19 +4,11 @@ const paddingContainer = "25px"
 
 export const StyledCustomerInfo = styled.div`
   .header {
-    background: var(--secondary);
-    color: #fff;
-    text-align: center;
-    color: #fff;
-    padding: ${paddingContainer};
-    border-top-right-radius: 8px;
-    border-top-left-radius: 8px;
     h4 {
       font-size: 2.5rem;
     }
   }
   .body {
-    background: #fff;
     form {
       div {
         display: flex;
@@ -43,11 +35,6 @@ export const StyledCustomerInfo = styled.div`
     }
   }
   .footer {
-    padding: ${paddingContainer};
-    border-top: 1px solid #ccc;
-    text-align: center;
-    border-bottom-right-radius: 8px;
-    border-bottom-left-radius: 8px;
     button {
       padding: 10px 45px;
       font-size: 2rem;
