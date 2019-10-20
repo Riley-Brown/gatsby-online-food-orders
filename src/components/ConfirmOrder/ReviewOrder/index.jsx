@@ -2,6 +2,7 @@ import React from "react"
 import { useDispatch, useSelector } from "react-redux"
 
 import Img from "gatsby-image"
+import chevronDown from "assets/svg/chevron-down.svg"
 
 import { StyledReviewOrder } from "./StyledReviewOrder"
 
@@ -14,7 +15,10 @@ export default function ReviewOrder({ close, next }) {
   return (
     <StyledReviewOrder>
       <div className="header">
-        <h4>Review Order</h4>
+        <button onClick={() => close()} name="close">
+          <h2>Review Order</h2>
+          <img src={chevronDown} alt="toggle cart" />
+        </button>
       </div>
       <div className="body">
         <div className="items">
@@ -65,7 +69,7 @@ export default function ReviewOrder({ close, next }) {
       <div className="footer">
         <div className="total">
           <h3>
-            Order Total:
+            Total:
             <span>${totalPrice}</span>
           </h3>
         </div>
