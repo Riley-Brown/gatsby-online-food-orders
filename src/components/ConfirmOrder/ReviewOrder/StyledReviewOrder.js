@@ -19,6 +19,9 @@ export const StyledReviewOrder = styled.div`
         align-items: center;
         margin-bottom: 30px;
         padding: ${paddingContainer};
+        @media (max-width: 650px) {
+          flex-direction: column;
+        }
         @media (max-width: 500px) {
           padding: ${paddingContainerMobile};
         }
@@ -36,6 +39,10 @@ export const StyledReviewOrder = styled.div`
         .gatsby-image-wrapper {
           flex: 0 0 40%;
           border-radius: 20px;
+          @media (max-width: 650px) {
+            width: 70%;
+            flex: 1 1 auto;
+          }
         }
         .item-price {
           margin: 1rem 0;
@@ -75,9 +82,11 @@ export const StyledReviewOrder = styled.div`
     .total {
       h3 {
         font-size: 2rem;
+        font-weight: 500;
         span {
           margin-left: 5px;
           font-size: 2rem;
+          font-weight: 500;
         }
       }
     }
