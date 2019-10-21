@@ -6,9 +6,14 @@ import axios from "axios"
 
 import { useSelector, useDispatch } from "react-redux"
 
+import spinnerSvg from "assets/svg/spinner.svg"
+
 import swal from "@sweetalert/with-react"
 
-export default function CustomerInfo({ previous, confirmOrder, close }) {
+import { renderEmail } from "react-html-email"
+import useEmailTemplate from "./EmailTemplate"
+
+export default function CustomerInfo({ previous, close }) {
   const [inputs, setInputs] = useState({
     name: "",
     email: "",
@@ -20,36 +25,19 @@ export default function CustomerInfo({ previous, confirmOrder, close }) {
   const [loading, setLoading] = useState(false)
 
   const handleSubmit = e => {
+    setLoading(true)
     e.preventDefault()
     console.log(e)
     send()
   }
 
   const order = useSelector(state => state.global.order)
+  const [emailTemplate] = useEmailTemplate(order)
 
-  const toHtml = async element => {
-    const orderHTML = (
-      <div>
-        {order.map(item => (
-          <div>
-            <h4>{item.name}</h4>
-            <p>{item.size}</p>
-            <p>{item.price}</p>
-            <p>Quantity: {item.quantity}</p>
-            AddOns: lmao
-            <a href="https://google.com?confirm=true">
-              <button>Confirm Order</button>
-            </a>
-          </div>
-        ))}
-      </div>
-    )
-
-    return ReactDOMServer.renderToString(orderHTML)
-  }
+  const orderHTML = renderEmail(emailTemplate)
 
   const send = async () => {
-    const html = await toHtml()
+    const html = orderHTML
     const data = {
       user_email: "riley@riley.gg",
       user_name: inputs.name,
@@ -59,14 +47,15 @@ export default function CustomerInfo({ previous, confirmOrder, close }) {
     }
 
     try {
-      // const test = await axios.post(
-      //   "/.netlify/functions/confirmOrder",
-      //   JSON.stringify(data)
-      // )
-      let test = true
+      const test = await axios.post(
+        "/.netlify/functions/confirmOrder",
+        JSON.stringify(data)
+      )
+
       console.log(test)
       if (test) {
         setSuccess(true)
+        setLoading(false)
         close()
         swal(
           "Order Placed",
@@ -134,7 +123,13 @@ export default function CustomerInfo({ previous, confirmOrder, close }) {
           <button type="button" onClick={previous}>
             Back
           </button>
-          <button type="submit">Place Order</button>
+          <button type="submit">
+            {loading ? (
+              <img src={spinnerSvg} alt="Placing Order..." />
+            ) : (
+              "Place Order"
+            )}
+          </button>
         </footer>
       </form>
     </StyledCustomerInfo>
