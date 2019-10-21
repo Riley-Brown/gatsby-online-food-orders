@@ -1,11 +1,13 @@
 import React from "react"
 import { Email, Item as EmailItem, Span, A, Image, Box } from "react-html-email"
 
-import { useSelector } from "react-redux"
-
-export default function useEmailTemplate(order) {
-  // const order = useSelector(state => state.global.order)
-
+export default function useEmailTemplate({
+  order,
+  email,
+  name,
+  phone,
+  message,
+}) {
   const emailHTML = (
     <Email title="New Food Order">
       <Box
@@ -25,12 +27,22 @@ export default function useEmailTemplate(order) {
         </EmailItem>
         <EmailItem>
           <Span fontSize={16}>Name:</Span>
-          <Span fontSize={16}> Riley</Span>
+          <Span fontSize={16}> {name}</Span>
         </EmailItem>
         <EmailItem>
           <Span fontSize={16}>Email</Span>
-          <Span fontSize={16}> riley@gmail.com</Span>
+          <Span fontSize={16}> {email}</Span>
         </EmailItem>
+        <EmailItem>
+          <Span fontSize={16}>Phone</Span>
+          <Span fontSize={16}> {phone}</Span>
+        </EmailItem>
+        {message && (
+          <EmailItem>
+            <Span fontSize={16}>Message</Span>
+            <Span fontSize={16}> {message}</Span>
+          </EmailItem>
+        )}
       </Box>
       <Box
         width="100%"
