@@ -75,7 +75,7 @@ button {
 
 .modal-open {
   overflow: hidden;
-  /* pointer-events: none; */
+  pointer-events: none;
   -webkit-overflow-scrolling: touch;
   position: fixed;
   width: 100%;
