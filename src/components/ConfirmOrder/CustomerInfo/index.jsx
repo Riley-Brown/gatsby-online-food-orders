@@ -32,7 +32,13 @@ export default function CustomerInfo({ previous, close }) {
   }
 
   const order = useSelector(state => state.global.order)
-  const [emailTemplate] = useEmailTemplate(order)
+  const [emailTemplate] = useEmailTemplate({
+    order,
+    name: inputs.name,
+    email: inputs.email,
+    phone: inputs.phone,
+    message: inputs.message,
+  })
 
   const orderHTML = renderEmail(emailTemplate)
 
