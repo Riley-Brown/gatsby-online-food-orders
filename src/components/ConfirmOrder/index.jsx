@@ -20,8 +20,10 @@ export default function ConfirmOrder() {
     }
     if (show) {
       document.querySelector("body").classList.add("modal-open")
+      document.querySelector("html").classList.add("modal-open")
     } else {
       document.querySelector("body").classList.remove("modal-open")
+      document.querySelector("html").classList.remove("modal-open")
     }
     return () => document.removeEventListener("mousedown", handleOutsideClick)
   }, [show])

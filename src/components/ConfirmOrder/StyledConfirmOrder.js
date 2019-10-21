@@ -12,6 +12,7 @@ export const StyledConfirmOrder = styled.div`
   background: rgba(0, 0, 0, 0.7);
   z-index: 22;
   overflow-y: auto;
+  pointer-events: auto;
   #confirm-order-modal {
     position: absolute;
     left: 50%;
@@ -71,11 +72,13 @@ export const StyledConfirmOrder = styled.div`
     .body {
       background: #fff;
       max-height: 450px;
-      height: calc(100vh - 150px);
+      height: calc(100vh - 110px);
       overflow-y: auto;
+      transform: translate3d(0, 0, 0);
       -webkit-overflow-scrolling: touch;
       @media (max-width: 500px) {
         max-height: initial;
+        /* height: calc(100vh - 150px); */
       }
     }
     .footer {
