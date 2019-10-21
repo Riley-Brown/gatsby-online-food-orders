@@ -80,6 +80,9 @@ export const StyledReviewOrder = styled.div`
   }
   .footer {
     .total {
+      @media (max-width: 500px) {
+        margin-top: 1rem;
+      }
       h3 {
         font-size: 2rem;
         font-weight: 500;
