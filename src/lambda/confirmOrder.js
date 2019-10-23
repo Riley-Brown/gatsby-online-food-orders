@@ -1,9 +1,37 @@
 const sgMail = require("@sendgrid/mail")
+const MongoClient = require("mongodb").MongoClient
+const dotenv = require("dotenv")
+
+if (process.env.NODE_ENV !== "production") {
+  dotenv.config()
+}
+
+const client = new MongoClient(process.env.MONGO_DB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
 
 exports.handler = function(event, context, callback) {
   const { SEND_GRID_API_KEY } = process.env
   sgMail.setApiKey(SEND_GRID_API_KEY)
   const data = JSON.parse(event.body)
+
+  if (!data.user_email && data.order_id) {
+    return callback(null, {
+      statusCode: 400,
+      body: "You done goofed up",
+    })
+  }
+
+  const dbData = {
+    userEmail: data.user_email,
+    userName: data.user_name,
+    userPhone: data.user_phone,
+    userMessage: data.user_message,
+    orderId: data.order_id,
+    confirmed: false,
+    declined: false,
+  }
 
   const msg = {
     to: data.user_email,
@@ -12,17 +40,18 @@ exports.handler = function(event, context, callback) {
     html: data.html,
   }
 
-  console.log(event.origin)
-  if (data.user_email) {
-    sgMail.send(msg)
-    return callback(null, {
-      statusCode: 200,
-      body: "success",
+  // save data to db
+  client.connect(err => {
+    const collection = client.db("Rawberri").collection("orders")
+    collection.insertOne(dbData).then(res => {
+      if (res.insertedCount) {
+        client.close()
+        sgMail.send(msg)
+        return callback(null, {
+          statusCode: 200,
+          body: "success",
+        })
+      }
     })
-  } else {
-    return callback(null, {
-      statusCode: 400,
-      body: "something went wrong gg im switching to heroku",
-    })
-  }
+  })
 }
