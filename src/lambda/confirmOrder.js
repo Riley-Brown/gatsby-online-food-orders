@@ -11,9 +11,9 @@ const client = new MongoClient(process.env.MONGO_DB_URI, {
   useUnifiedTopology: true,
 })
 
+sgMail.setApiKey(process.env.SEND_GRID_API_KEY)
+
 exports.handler = function(event, context, callback) {
-  const { SEND_GRID_API_KEY } = process.env
-  sgMail.setApiKey(SEND_GRID_API_KEY)
   const data = JSON.parse(event.body)
 
   if (!data.user_email && data.order_id) {
