@@ -49,6 +49,7 @@ export default function CustomerInfo({ previous, close }) {
       user_name: inputs.name,
       user_phone: inputs.phone,
       user_message: inputs.message,
+      order_id: Date.now(),
       html,
     }
 
@@ -58,8 +59,7 @@ export default function CustomerInfo({ previous, close }) {
         JSON.stringify(data)
       )
 
-      console.log(test)
-      if (test) {
+      if (test.status === 200) {
         setSuccess(true)
         setLoading(false)
         close()
