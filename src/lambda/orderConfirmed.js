@@ -1,4 +1,5 @@
 const MongoClient = require("mongodb").MongoClient
+const sgMail = require("@sendgrid/mail")
 const dotenv = require("dotenv")
 
 if (process.env.NODE_ENV !== "production") {
@@ -10,33 +11,83 @@ const client = new MongoClient(process.env.MONGO_DB_URI, {
   useUnifiedTopology: true,
 })
 
-exports.handler = (event, context, callback) => {
-  const params = event.queryStringParameters
-  console.log(params.orderId)
+sgMail.setApiKey(process.env.SEND_GRID_API_KEY)
 
-  client.connect(err => {
-    const collection = client.db("Rawberri").collection("orders")
-    collection.findOne({ orderId: "test" }).then(res => {
-      console.log(res)
-      client.close()
-    })
-  })
-  console.log(process.env.MONGO_DB_URI, process.env.NODE_ENV)
-  try {
-    return callback(null, {
-      statusCode: 200,
-      body: "success",
-    })
-  } catch (err) {
-    console.log(err)
-    return callback(null, {
-      statusCode: 400,
-      body: "something done fucked up",
-    })
+exports.handler = async event => {
+  const { orderId, confirm, decline } = event.queryStringParameters
+
+  if (!orderId) {
+    return {
+      statusCode: 403,
+      body: "You done fucked up",
+    }
   }
 
-  return callback(null, {
-    statusCode: 200,
-    body: "success",
-  })
+  try {
+    await client.connect()
+    const collection = client.db("Rawberri").collection("orders")
+    const order = await collection.findOne({ orderId: Number(orderId) })
+
+    // order doesn't exist
+    if (!order) {
+      return {
+        statusCode: 403,
+        body: "you done fucked up bud",
+      }
+    }
+
+    // update confirmed bool and send user email
+    if (confirm === "true" && !order.confirmed && !order.declined) {
+      await collection.updateOne(
+        { orderId: Number(orderId) },
+        { $set: { confirmed: true } }
+      )
+
+      const msg = {
+        to: order.userEmail,
+        from: "orders-testing@riley.gg",
+        subject: "Order Confirmed",
+        html: "<h1>Order confirmed congrats, good job, really good!!!</h1>",
+      }
+      await sgMail.send(msg)
+
+      return {
+        statusCode: 200,
+        body: "great job you finally did it",
+      }
+    }
+
+    // update declined bool and send user email
+    if (decline === "true" && !order.confirmed && !order.declined) {
+      await collection.updateOne(
+        { orderId: Number(orderId) },
+        { $set: { declined: true } }
+      )
+
+      const msg = {
+        to: order.userEmail,
+        from: "orders-testing@riley.gg",
+        subject: "Order Declined",
+        html: "<h1>Order declined unlucky bro</h1>",
+      }
+      await sgMail.send(msg)
+
+      return {
+        statusCode: 200,
+        body: "great job you finally did it",
+      }
+    }
+
+    // catch all
+    return {
+      statusCode: 400,
+      body: "something broke gg",
+    }
+  } catch (err) {
+    console.log(err)
+    return {
+      statusCode: 400,
+      body: "something fucked up",
+    }
+  }
 }
