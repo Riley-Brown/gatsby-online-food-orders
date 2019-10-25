@@ -11,6 +11,15 @@ const client = new MongoClient(process.env.MONGO_DB_URI, {
   useUnifiedTopology: true,
 })
 
+const confirmedHTML = `<script src='https://unpkg.com/sweetalert/dist/sweetalert.min.js'></script>
+<script> window.addEventListener('DOMContentLoaded', () => {
+    swal('hey', 'Order Confirmed', 'success')
+    window.setTimeout(() => {
+      window.location.href = 'https://loving-kilby-fc3f0a.netlify.com/'
+    }, 3000)
+  })
+</script>`
+
 sgMail.setApiKey(process.env.SEND_GRID_API_KEY)
 
 exports.handler = async event => {
@@ -47,13 +56,13 @@ exports.handler = async event => {
         to: order.userEmail,
         from: "orders-testing@riley.gg",
         subject: "Order Confirmed",
-        html: "<h1>Order confirmed congrats, good job, really good!!!</h1>",
+        html: order.confirmedOrderHtml,
       }
       await sgMail.send(msg)
 
       return {
         statusCode: 200,
-        body: "great job you finally did it",
+        body: confirmedHTML,
       }
     }
 
