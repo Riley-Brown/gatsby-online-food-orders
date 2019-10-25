@@ -13,6 +13,8 @@ import swal from "@sweetalert/with-react"
 import { renderEmail } from "react-html-email"
 import useEmailTemplate from "./EmailTemplate"
 
+import { setOrder } from "state/actions"
+
 export default function CustomerInfo({ previous, close }) {
   const [inputs, setInputs] = useState({
     name: "",
@@ -21,8 +23,12 @@ export default function CustomerInfo({ previous, close }) {
     message: "",
   })
 
+  const dispatch = useDispatch()
+
   const [success, setSuccess] = useState(false)
   const [loading, setLoading] = useState(false)
+
+  const orderId = Date.now()
 
   const handleSubmit = e => {
     setLoading(true)
@@ -32,25 +38,44 @@ export default function CustomerInfo({ previous, close }) {
   }
 
   const order = useSelector(state => state.global.order)
-  const [emailTemplate] = useEmailTemplate({
+  const orderTotal = useSelector(state => state.global.totalPrice)
+
+  const [merchantEmailTemplate] = useEmailTemplate({
     order,
+    orderTotal,
     name: inputs.name,
     email: inputs.email,
     phone: inputs.phone,
     message: inputs.message,
+    orderId,
+    emailType: "merchant",
   })
 
-  const orderHTML = renderEmail(emailTemplate)
+  const [customerOrderEmailTemplate] = useEmailTemplate({
+    order,
+    orderTotal,
+  })
+
+  const [confirmedOrderEmailTemplate] = useEmailTemplate({
+    order,
+    orderTotal,
+    emailType: "confirmedOrder",
+  })
+
+  const merchantHTML = renderEmail(merchantEmailTemplate)
+  const customerHTML = renderEmail(customerOrderEmailTemplate)
+  const confirmOrderHTML = renderEmail(confirmedOrderEmailTemplate)
 
   const send = async () => {
-    const html = orderHTML
     const data = {
-      user_email: "riley@riley.gg",
+      user_email: inputs.email,
       user_name: inputs.name,
       user_phone: inputs.phone,
       user_message: inputs.message,
-      order_id: Date.now(),
-      html,
+      order_id: orderId,
+      merchant_html: merchantHTML,
+      customer_html: customerHTML,
+      confirmed_order_html: confirmOrderHTML,
     }
 
     try {
@@ -62,6 +87,7 @@ export default function CustomerInfo({ previous, close }) {
       if (test.status === 200) {
         setSuccess(true)
         setLoading(false)
+        dispatch(setOrder([]))
         close()
         swal(
           "Order Placed",
@@ -71,6 +97,12 @@ export default function CustomerInfo({ previous, close }) {
       }
     } catch (err) {
       console.log(err)
+      setLoading(false)
+      swal(
+        "Something went wrong",
+        "We're sorry, there was an error placing your order. Please try again.",
+        "danger"
+      )
     }
   }
 
