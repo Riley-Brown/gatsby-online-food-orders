@@ -31,13 +31,21 @@ exports.handler = function(event, context, callback) {
     orderId: data.order_id,
     confirmed: false,
     declined: false,
+    confirmedOrderHtml: data.confirmed_order_html,
   }
 
   const msg = {
-    to: data.user_email,
+    to: "riley@riley.gg",
     from: "orders-testing@riley.gg",
     subject: "New online order placed",
-    html: data.html,
+    html: data.merchant_html,
+  }
+
+  const customerMsg = {
+    to: data.user_email,
+    from: "orders-testing@riley.gg",
+    subject: "Order placed on Rawberri!",
+    html: data.customer_html,
   }
 
   // save data to db
@@ -47,6 +55,7 @@ exports.handler = function(event, context, callback) {
       if (res.insertedCount) {
         client.close()
         sgMail.send(msg)
+        sgMail.send(customerMsg)
         return callback(null, {
           statusCode: 200,
           body: "success",
