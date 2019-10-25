@@ -7,43 +7,112 @@ export default function useEmailTemplate({
   name,
   phone,
   message,
+  orderId,
+  emailType,
+  orderTotal,
 }) {
   const emailHTML = (
+    // Merchant email for confirming order
     <Email title="New Food Order">
-      <Box
-        width="100%"
-        cellSpacing={20}
-        style={{
-          border: "1px solid #ccc",
-          marginBottom: "20px",
-          marginTop: "20px",
-          backgroundColor: "#fff",
-        }}
-      >
-        <EmailItem align="center">
-          <Span color="#444" fontSize={23}>
-            Customer Info
-          </Span>
-        </EmailItem>
-        <EmailItem>
-          <Span fontSize={16}>Name:</Span>
-          <Span fontSize={16}> {name}</Span>
-        </EmailItem>
-        <EmailItem>
-          <Span fontSize={16}>Email</Span>
-          <Span fontSize={16}> {email}</Span>
-        </EmailItem>
-        <EmailItem>
-          <Span fontSize={16}>Phone</Span>
-          <Span fontSize={16}> {phone}</Span>
-        </EmailItem>
-        {message && (
-          <EmailItem>
-            <Span fontSize={16}>Message</Span>
-            <Span fontSize={16}> {message}</Span>
+      {emailType === "merchant" ? (
+        <Box
+          width="100%"
+          cellSpacing={20}
+          style={{
+            border: "1px solid #ccc",
+            marginBottom: "20px",
+            marginTop: "20px",
+            backgroundColor: "#fff",
+          }}
+        >
+          <EmailItem align="center">
+            <Span color="#444" fontSize={23}>
+              Customer Info
+            </Span>
           </EmailItem>
-        )}
-      </Box>
+          <EmailItem>
+            <Span fontSize={16}>Name:</Span>
+            <Span fontSize={16}> {name}</Span>
+          </EmailItem>
+          <EmailItem>
+            <Span fontSize={16}>Email:</Span>
+            <Span fontSize={16}> {email}</Span>
+          </EmailItem>
+          <EmailItem>
+            <Span fontSize={16}>Phone:</Span>
+            <Span fontSize={16}> {phone}</Span>
+          </EmailItem>
+          {message && (
+            <EmailItem>
+              <Span fontSize={16}>Message:</Span>
+              <Span fontSize={16}> {message}</Span>
+            </EmailItem>
+          )}
+          <EmailItem>
+            <Span style={{ fontWeight: "bold" }} fontSize={16}>
+              Order Total:
+            </Span>
+            <Span fontSize={16}> ${orderTotal}</Span>
+          </EmailItem>
+        </Box>
+      ) : emailType === "confirmedOrder" ? (
+        <Box
+          width="100%"
+          cellSpacing={20}
+          style={{
+            border: "1px solid #ccc",
+            marginBottom: "20px",
+            marginTop: "20px",
+            backgroundColor: "#fff",
+          }}
+        >
+          <EmailItem align="center">
+            <Span color="#444" fontSize={23}>
+              Your Rawberri order has been confirmed!
+            </Span>
+          </EmailItem>
+          <EmailItem>
+            <Span fontSize={16}>
+              Your recent Rawberri order has been confirmed!
+            </Span>
+          </EmailItem>
+          <EmailItem>
+            <Span fontSize={16}>
+              A total of ${orderTotal} will be due in store.
+            </Span>
+          </EmailItem>
+        </Box>
+      ) : (
+        // Customer placed order email
+        <Box
+          width="100%"
+          cellSpacing={20}
+          style={{
+            border: "1px solid #ccc",
+            marginBottom: "20px",
+            marginTop: "20px",
+            backgroundColor: "#fff",
+          }}
+        >
+          <EmailItem align="center">
+            <Span color="#444" fontSize={23}>
+              Thanks for your order!
+            </Span>
+          </EmailItem>
+          <EmailItem>
+            <Span fontSize={16}>
+              Your recent Rawberri order totaling ${orderTotal} has been placed
+              and is awaiting confirmation!
+            </Span>
+          </EmailItem>
+          <EmailItem>
+            <Span fontSize={16}>
+              You will receive an email an email when your order is confirmed by
+              Rawberri. Payment can be made directly in store.
+            </Span>
+          </EmailItem>
+        </Box>
+      )}
       <Box
         width="100%"
         cellSpacing={20}
@@ -110,7 +179,6 @@ export default function useEmailTemplate({
               </ul>
             </EmailItem>
           )}
-
           <EmailItem width="50%">
             <Image
               alt={item.name}
@@ -126,51 +194,57 @@ export default function useEmailTemplate({
           </EmailItem>
         </Box>
       ))}
-      <Box
-        marginBottom={20}
-        cellSpacing={20}
-        width="100%"
-        style={{
-          border: "1px solid #ccc",
-          backgroundColor: "#fff",
-          marginTop: "40px",
-          padding: "20px",
-        }}
-      >
-        <EmailItem align="center">
-          <A
-            href="https://google.com?confirm=true"
-            style={{ textDecoration: "none" }}
-          >
-            <Span
-              fontSize={25}
-              style={{
-                width: "45%",
-                backgroundColor: "#4f6489",
-                color: "#fff",
-                borderRadius: "4px",
-                padding: "10px",
-                marginRight: "20px",
-              }}
+      {emailType === "merchant" && (
+        <Box
+          marginBottom={20}
+          cellSpacing={20}
+          width="100%"
+          style={{
+            border: "1px solid #ccc",
+            backgroundColor: "#fff",
+            marginTop: "40px",
+            padding: "20px",
+          }}
+        >
+          <EmailItem align="center">
+            <A
+              href={`http://localhost:9000/orderConfirmed?orderId=${orderId}&confirm=true`}
+              style={{ textDecoration: "none" }}
             >
-              Confirm Order
-            </Span>
-
-            <Span
-              fontSize={25}
-              style={{
-                width: "45%",
-                backgroundColor: "red",
-                color: "#fff",
-                borderRadius: "4px",
-                padding: "10px",
-              }}
+              <Span
+                fontSize={25}
+                style={{
+                  width: "45%",
+                  backgroundColor: "#4f6489",
+                  color: "#fff",
+                  borderRadius: "4px",
+                  padding: "10px",
+                  marginRight: "20px",
+                }}
+              >
+                Confirm Order
+              </Span>
+            </A>
+            <A
+              href={`http://localhost:9000/orderConfirmed?orderId=${orderId}&confirm=true`}
+              style={{ textDecoration: "none" }}
             >
-              Decline Order
-            </Span>
-          </A>
-        </EmailItem>
-      </Box>
+              <Span
+                fontSize={25}
+                style={{
+                  width: "45%",
+                  backgroundColor: "red",
+                  color: "#fff",
+                  borderRadius: "4px",
+                  padding: "10px",
+                }}
+              >
+                Decline Order
+              </Span>
+            </A>
+          </EmailItem>
+        </Box>
+      )}
     </Email>
   )
 
