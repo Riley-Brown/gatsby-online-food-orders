@@ -8,13 +8,15 @@ import { StyledNav } from "./StyledNav"
 import MobileNav from "./MobileNav"
 
 const Nav = ({ siteTitle, pathname }) => {
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState(true)
   const [showMobileMenu, setShowMobileMenu] = useState(false)
 
   useLayoutEffect(() => {
     const mq = window.matchMedia("(max-width: 1100px)")
     if (mq.matches) {
       setIsMobile(true)
+    } else {
+      setIsMobile(false)
     }
     mq.addListener(() => {
       console.log(mq.matches)
