@@ -3,8 +3,7 @@ import { transitionClasses } from "helpers/transitionClasses"
 
 export const StyledNav = styled.nav`
   ${transitionClasses("nav", 400)};
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 1;
   box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.2);
   background: #fff;
