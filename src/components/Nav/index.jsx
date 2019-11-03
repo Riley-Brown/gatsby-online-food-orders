@@ -1,6 +1,6 @@
 import { Link } from "gatsby"
 import PropTypes from "prop-types"
-import React, { useState, useEffect } from "react"
+import React, { useState, useLayoutEffect } from "react"
 import logo from "assets/img/rawberri-logo-cropped-bg.png"
 
 import { StyledNav } from "./StyledNav"
@@ -11,7 +11,7 @@ const Nav = ({ siteTitle, pathname }) => {
   const [isMobile, setIsMobile] = useState(false)
   const [showMobileMenu, setShowMobileMenu] = useState(false)
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const mq = window.matchMedia("(max-width: 1100px)")
     if (mq.matches) {
       setIsMobile(true)
