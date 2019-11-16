@@ -208,7 +208,7 @@ export default function useEmailTemplate({
         >
           <EmailItem align="center">
             <A
-              href={`http://localhost:9000/orderConfirmed?orderId=${orderId}&confirm=true`}
+              href={`/.netlify/functions/orderConfirmed?orderId=${orderId}&confirm=true`}
               style={{ textDecoration: "none" }}
             >
               <Span
@@ -226,7 +226,7 @@ export default function useEmailTemplate({
               </Span>
             </A>
             <A
-              href={`http://localhost:9000/orderConfirmed?orderId=${orderId}&confirm=true`}
+              href={`/.netlify/functions/orderConfirmed?orderId=${orderId}&confirm=true`}
               style={{ textDecoration: "none" }}
             >
               <Span
