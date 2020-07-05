@@ -31,7 +31,7 @@ const Nav = ({ siteTitle, pathname }) => {
     <StyledNav showMobileMenu={showMobileMenu}>
       <div className="nav-container">
         <Link to="/">
-          <img src={logo} />
+          <img src={logo} alt="Rawberri logo" />
         </Link>
         <MobileNav isMobile={isMobile} showMobileMenu={showMobileMenu}>
           <ul onClick={() => setShowMobileMenu(false)}>

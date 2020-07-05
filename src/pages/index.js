@@ -14,6 +14,10 @@ const IndexPage = () => {
 
   return (
     <Layout>
+      <SEO
+        title="Rawberri Smoothies"
+        description="Rawberri Smoothie shop in West Hollywood CA providing high quality organic super-foods."
+      />
       <Categories />
       <OrderCart />
       <ConfirmOrder />

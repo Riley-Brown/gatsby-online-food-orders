@@ -82,7 +82,7 @@ export default function OrderCart() {
               <h4>Order Empty!</h4>
               <p>Click on any category to start building your order.</p>
             </div>
-            <img src={emptyCartSvg}></img>
+            <img src={emptyCartSvg} alt="Empty Order" />
           </div>
         ) : (
           <>
